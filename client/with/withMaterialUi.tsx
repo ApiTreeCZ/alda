@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {MuiThemeProvider, Reboot} from 'material-ui';
 import {StylesContext} from '../styles/StylesContext';
+import {AppFrame} from '../components';
 // tslint:disable-next-line
 const JssProvider = require('react-jss/lib/JssProvider').default;
-
 
 export const withMaterialUi = (BaseComponent: React.ComponentClass & { getInitialProps?(ctx: any): Promise<any> }) => {
 
@@ -22,7 +22,8 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & { getInitia
             return {};
         }
 
-        componentWillMount() {
+        constructor(props: Props, context: any) {
+            super(props, context);
             this.pageContext = this.props.pageContext || StylesContext.getPageContext('light');
         }
 
@@ -40,7 +41,7 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & { getInitia
                 <JssProvider jss={jss} registry={sheetsRegistry} generateClassName={generateClassName}>
                     <MuiThemeProvider theme={theme} sheetsManager={sheetsManager}>
                         <Reboot/>
-                        <BaseComponent {...this.props}/>
+                        <AppFrame><BaseComponent {...this.props}/></AppFrame>
                     </MuiThemeProvider>
                 </JssProvider>
             );

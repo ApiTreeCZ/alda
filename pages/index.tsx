@@ -3,7 +3,6 @@ import {Dispatch} from 'redux';
 import {Typography} from 'material-ui';
 import {app} from '../client/app';
 import {Store} from '../client/Store';
-import {AppFrame} from '../client/components';
 
 interface OwnProps {
 }
@@ -18,9 +17,9 @@ class Index extends React.Component<ConnectedState & ConnectedDispatch & OwnProp
 
     render() {
         return (
-            <AppFrame>
+            <div>
                 <Typography variant="display1">ALDO</Typography>
-            </AppFrame>
+            </div>
         );
     }
 }

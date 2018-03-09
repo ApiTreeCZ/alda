@@ -1,16 +1,29 @@
 import * as React from 'react';
 import Document, {Head, Main, NextScript} from 'next/document';
 import {StylesContext} from '../client/styles/StylesContext';
+import postcss from 'postcss';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+
+const prefixer = postcss([autoprefixer]);
+const minifier = postcss([cssnano]);
 
 class MainDocument extends Document {
 
     static async getInitialProps(ctx: any) {
         const pageContext = StylesContext.getPageContext('light');
         const page = ctx.renderPage((Component: any) => (props: any) => (<Component pageContext={pageContext} {...props} />));
+
+        let css = pageContext.sheetsRegistry.toString();
+        if (process.env.NODE_ENV === 'production') {
+            css = (await prefixer.process(css, { from: undefined })).css;
+            css = (await minifier.process(css, { from: undefined })).css;
+        }
+
         return {
             ...page,
             pageContext,
-            styles: (<style id="jss-server-side" dangerouslySetInnerHTML={{__html: pageContext.sheetsRegistry.toString()}}/>),
+            styles: (<style id="jss-server-side" dangerouslySetInnerHTML={{__html: css}}/>),
         };
     }
 

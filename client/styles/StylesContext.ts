@@ -9,7 +9,6 @@ declare const global: any;
 
 // Configure JSS
 const jss = create({plugins: [...jssPreset().plugins]});
-// jss.options.insertionPoint = 'insertion-point-jss';
 
 const createPageContext = (paletteType: PaletteType) => {
     return {
