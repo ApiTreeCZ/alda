@@ -1,0 +1,41 @@
+{
+  "name": "aldo",
+  "description": "React stack with material-ui",
+  "version": "1.0.0",
+  "author": "ApiTree",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ApiTreeCZ/aldo.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ApiTreeCZ/aldo/issues"
+  },
+  "homepage": "https://github.com/ApiTreeCZ/aldo#readme",
+  "scripts": {
+    "prebuild": "rimraf -- dist .next",
+    "build": "next build && tsc --project tsconfig.server.json",
+    "start": "NODE_ENV=production node dist/index.js",
+    "dev": "nodemon server/index.ts",
+    "tslint": "tslint -c tslint.json 'client/**/*.*' 'pages/**/*.*' 'server/**/*.*'"
+  },
+  "dependencies": {
+    "@types/next": "2.4.8",
+    "@types/react": "16.0.40",
+    "next": "5.0.0",
+    "react": "16.2.0",
+    "react-dom": "16.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "4.11.1",
+    "@zeit/next-typescript": "0.0.10",
+    "dotenv": "5.0.1",
+    "express": "4.16.2",
+    "nodemon": "1.17.1",
+    "rimraf": "2.6.2",
+    "ts-node": "5.0.1",
+    "tslint": "5.9.1",
+    "tslint-react": "3.5.1",
+    "typescript": "2.7.2"
+  }
+}

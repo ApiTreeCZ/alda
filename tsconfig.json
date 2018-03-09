@@ -1,0 +1,31 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "preserve",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/@eon.cz/apollo13-graphql/types"
+    ],
+    "paths": {
+      "@graphql-model": ["./node_modules/@eon.cz/apollo13-graphql/types/graphql-model.d.ts"]
+    },
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016"
+    ]
+  }
+}
