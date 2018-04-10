@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {Dispatch} from 'redux';
-import {Typography} from 'material-ui';
+import {Grid, Typography} from 'material-ui';
 import {app} from '../client/app';
 import {Store} from '../client/Store';
+import {PageContainer} from '../client/containers';
 
 interface OwnProps {}
 
@@ -13,9 +14,18 @@ interface ConnectedDispatch {}
 class Index extends React.Component<ConnectedState & ConnectedDispatch & OwnProps> {
     render() {
         return (
-            <div>
-                <Typography variant="display1">ALDO</Typography>
-            </div>
+            <PageContainer>
+                <Grid container>
+                    <Grid item xs={12}>
+                        <Typography variant="display1">ALDO</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="caption">
+                            A boilerplate for React isomorphic aplication with Material Design, GraphQL, Redux, Redux Form and custom server
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </PageContainer>
         );
     }
 }
