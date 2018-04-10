@@ -1,4 +1,4 @@
-# ALDO
+# ALDO ![GitHub license](https://img.shields.io/badge/license-ISC-blue.svg) [![CircleCI](https://circleci.com/gh/ApiTreeCZ/aldo/tree/master.svg?style=shield)](https://circleci.com/gh/ApiTreeCZ/aldo/tree/master)
 > A boilerplate for React isomorphic aplication with Material Design, GraphQL, Redux, Redux Form and custom server
 
 * Do you want to start with React?
