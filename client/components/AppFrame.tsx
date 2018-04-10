@@ -2,9 +2,7 @@ import * as React from 'react';
 import {Fragment} from 'react';
 import {withStyles} from 'material-ui';
 
-interface Props {
-
-}
+interface Props {}
 
 const decorate = withStyles((theme) => ({
     '@global': {
@@ -19,4 +17,4 @@ const decorate = withStyles((theme) => ({
     } as any,
 }));
 
-export const AppFrame = decorate<Props>(({children}) => (<Fragment>{children}</Fragment>));
+export const AppFrame = decorate<Props>(({children}) => <Fragment>{children}</Fragment>);

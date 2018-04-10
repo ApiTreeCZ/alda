@@ -24,7 +24,6 @@ const createPageContext = (paletteType: PaletteType) => {
 };
 
 export const StylesContext = {
-
     getPageContext(paletteType: PaletteType) {
         // Make sure to create a new store for every server-side request so that data
         // isn't shared between connections (which would be bad)
@@ -38,5 +37,4 @@ export const StylesContext = {
         }
         return global.__INIT_MATERIAL_UI__;
     },
-
 };

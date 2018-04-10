@@ -11,10 +11,10 @@ import {Store} from '../Store';
 declare const process: any;
 
 // tslint:disable-next-line
-const createErrorLink = (_: ApolloClient<any>, _dispatch: Dispatch<Store>) => onError(() => {
-
-    // TODO handle GraphQL errors
-});
+const createErrorLink = (_: ApolloClient<any>, _dispatch: Dispatch<Store>) =>
+    onError(() => {
+        // TODO handle GraphQL errors
+    });
 
 const client = new ApolloClient({
     connectToDevTools: process.browser,
@@ -28,14 +28,12 @@ const createClient = (dispatch: Dispatch<Store>) => {
     return client;
 };
 
-export const withApolloProvider = (Page: React.ComponentClass & { getInitialProps?: (ctx) => any }): React.ComponentClass<any> => {
-
+export const withApolloProvider = (Page: React.ComponentClass & {getInitialProps?: (ctx) => any}): React.ComponentClass<any> => {
     interface ConnectedDispatch {
         readonly dispatch: Dispatch<Store>;
     }
 
     class PageWithApollo extends React.Component<any> {
-
         static async getInitialProps(ctx: any) {
             if (Page.getInitialProps) {
                 return Page.getInitialProps(ctx);

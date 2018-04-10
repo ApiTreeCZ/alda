@@ -16,12 +16,8 @@
     "outDir": "dist",
     "baseUrl": ".",
     "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules/@eon.cz/apollo13-graphql/types"
+      "./node_modules/@types"
     ],
-    "paths": {
-      "@graphql-model": ["./node_modules/@eon.cz/apollo13-graphql/types/graphql-model.d.ts"]
-    },
     "lib": [
       "dom",
       "es2015",

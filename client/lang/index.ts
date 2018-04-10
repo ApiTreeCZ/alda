@@ -6,7 +6,7 @@ export const messages = (locale?: string) => {
     // const tr: any = require(`./${locale}`).translate;
     const tr: any = locale === 'cs' ? cs : en;
     const result: any = {};
-    tr.forEach((f: any) => result[f.key] = f.message);
+    tr.forEach((f: any) => (result[f.key] = f.message));
     return defineMessages(result);
 };
 

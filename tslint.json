@@ -1,35 +1,21 @@
 {
   "extends": [
     "tslint:recommended",
-    "tslint-react"
+    "tslint-react",
+    "tslint-config-prettier"
   ],
   "rules": {
-    "max-line-length": [160],
-    "semicolon": [
-      true,
-      "always",
-      "ignore-bound-class-methods"
-    ],
-    "quotemark": [
-      true,
-      "single",
-      "jsx-double"
+    "max-line-length": [
+      false,
+      160
     ],
     "member-ordering": [
       true,
-      "static-before-instance",
       "variables-before-functions"
     ],
-    "ordered-imports": [
-      false
-    ],
-    "interface-name": [
-      false
-    ],
-    "object-literal-key-quotes": [
-      true,
-      "as-needed"
-    ],
+    "ordered-imports": false,
+    "interface-name": false,
+    "jsx-curly-spacing": false,
     "object-literal-sort-keys": false,
     "no-object-literal-type-assertion": false,
     "no-empty-interface": false,

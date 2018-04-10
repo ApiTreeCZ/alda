@@ -1,18 +1,16 @@
 import * as React from 'react';
-import {MuiThemeProvider, Reboot} from 'material-ui';
+import {MuiThemeProvider} from 'material-ui';
 import {StylesContext} from '../styles/StylesContext';
 import {AppFrame} from '../components';
 // tslint:disable-next-line
 const JssProvider = require('react-jss/lib/JssProvider').default;
 
-export const withMaterialUi = (BaseComponent: React.ComponentClass & { getInitialProps?(ctx: any): Promise<any> }) => {
-
+export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitialProps?(ctx: any): Promise<any>}) => {
     interface Props {
         readonly pageContext?: any;
     }
 
     class Component extends React.Component<Props> {
-
         private pageContext: any = null;
 
         static async getInitialProps(ctx: any) {
@@ -40,8 +38,9 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & { getInitia
             return (
                 <JssProvider jss={jss} registry={sheetsRegistry} generateClassName={generateClassName}>
                     <MuiThemeProvider theme={theme} sheetsManager={sheetsManager}>
-                        <Reboot/>
-                        <AppFrame><BaseComponent {...this.props}/></AppFrame>
+                        <AppFrame>
+                            <BaseComponent {...this.props} />
+                        </AppFrame>
                     </MuiThemeProvider>
                 </JssProvider>
             );

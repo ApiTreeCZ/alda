@@ -5,14 +5,9 @@ import {rootReducer} from './rootReducer';
 
 declare const window: any;
 
-const isEnableReduxDevTools = (isServer: boolean) => {
-    return !isServer && window.__REDUX_DEVTOOLS_EXTENSION__ && process.env.NODE_ENV === 'development';
-};
+const isEnableReduxDevTools = (isServer: boolean) => !isServer && window.__REDUX_DEVTOOLS_EXTENSION__ && process.env.NODE_ENV === 'development';
 
-const reduxTools = (store: StoreCreator, isServer: boolean) => {
-    return isEnableReduxDevTools(isServer) ? window.__REDUX_DEVTOOLS_EXTENSION__()(store) : store;
-};
+const reduxTools = (store: StoreCreator, isServer: boolean) => (isEnableReduxDevTools(isServer) ? window.__REDUX_DEVTOOLS_EXTENSION__()(store) : store);
 
-export const createStore: any = (initialState: Store, {isServer}: any) => {
-    return compose(applyMiddleware(thunkMiddleware))(reduxTools(reduxCreateStore, isServer))(rootReducer, initialState);
-};
+export const createStore = (initialState: Store, {isServer}: {isServer: boolean}) =>
+    compose(applyMiddleware(thunkMiddleware))(reduxTools(reduxCreateStore, isServer))(rootReducer, initialState);

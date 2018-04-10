@@ -13,7 +13,6 @@ export const withIntl = (Page: any): React.ComponentClass<any> => {
     const IntlPage = injectIntl(Page);
 
     return class PageWithIntl extends React.Component<any, State> {
-
         static async getInitialProps(context: any) {
             let props;
             if (typeof Page.getInitialProps) {
@@ -39,7 +38,7 @@ export const withIntl = (Page: any): React.ComponentClass<any> => {
             const {...props} = this.props;
             return (
                 <IntlProvider locale={locale} messages={messages}>
-                    <IntlPage {...props}/>
+                    <IntlPage {...props} />
                 </IntlProvider>
             );
         }

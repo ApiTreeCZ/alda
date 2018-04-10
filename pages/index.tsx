@@ -4,17 +4,13 @@ import {Typography} from 'material-ui';
 import {app} from '../client/app';
 import {Store} from '../client/Store';
 
-interface OwnProps {
-}
+interface OwnProps {}
 
-interface ConnectedState {
-}
+interface ConnectedState {}
 
-interface ConnectedDispatch {
-}
+interface ConnectedDispatch {}
 
 class Index extends React.Component<ConnectedState & ConnectedDispatch & OwnProps> {
-
     render() {
         return (
             <div>
@@ -24,7 +20,4 @@ class Index extends React.Component<ConnectedState & ConnectedDispatch & OwnProp
     }
 }
 
-export default app(
-    ({}: Store): ConnectedState => ({}),
-    (_: Dispatch<Store>): ConnectedDispatch => ({}),
-)(Index);
+export default app(({}: Store): ConnectedState => ({}), (_: Dispatch<Store>): ConnectedDispatch => ({}))(Index);
