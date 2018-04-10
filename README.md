@@ -1,4 +1,4 @@
-# ALDO [![CircleCI](https://circleci.com/gh/ApiTreeCZ/aldo/tree/dev.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/ApiTreeCZ/aldo/tree/dev)
+# ALDO [![CircleCI](https://circleci.com/gh/ApiTreeCZ/aldo/tree/dev.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/ApiTreeCZ/aldo/tree/dev) [![Coverage Status](https://coveralls.io/repos/github/ApiTreeCZ/aldo/badge.svg?branch=dev)](https://coveralls.io/github/ApiTreeCZ/aldo?branch=dev)
 > A boilerplate for React isomorphic aplication with Material Design, GraphQL, Redux, Redux Form and custom server
 
 * Do you want to start with React?
