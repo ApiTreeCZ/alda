@@ -1,4 +1,4 @@
-# ALDO [![CircleCI](https://circleci.com/gh/ApiTreeCZ/aldo/tree/master.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/ApiTreeCZ/aldo/tree/master)
+# ALDO [![CircleCI](https://circleci.com/gh/ApiTreeCZ/aldo/tree/dev.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/ApiTreeCZ/aldo/tree/master)
 > A boilerplate for React isomorphic aplication with Material Design, GraphQL, Redux, Redux Form and custom server
 
 * Do you want to start with React?
