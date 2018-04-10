@@ -8,7 +8,9 @@
 
 ## Download
 
-* [Download source link](https://github.com/ApiTreeCZ/aldo/archive/master.zip)
+[Download release source code](https://github.com/ApiTreeCZ/aldo/releases)
+or
+[latest dev](https://github.com/ApiTreeCZ/aldo/archive/dev.zip)
 
 ## Usage
 
