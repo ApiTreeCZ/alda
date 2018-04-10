@@ -24,6 +24,12 @@ class Index extends React.Component<ConnectedState & ConnectedDispatch & OwnProp
                             A boilerplate for React isomorphic aplication with Material Design, GraphQL, Redux, Redux Form and custom server
                         </Typography>
                     </Grid>
+                    <Grid item xs={12}>
+                        <Typography>
+                            * Do you want to start with React? * Do you want to start with Material Design? * Do you want to start with Redux? * ...with
+                            Typescript
+                        </Typography>
+                    </Grid>
                 </Grid>
             </PageContainer>
         );
