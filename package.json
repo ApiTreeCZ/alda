@@ -21,7 +21,22 @@
     "tslint:check": "tslint-config-prettier-check ./tslint.json",
     "prettier:show": "prettier --list-different \"./**/*\"",
     "prettier:write": "prettier \"./**/*\" --write",
-    "precommit": "pretty-quick --staged && npm run tslint"
+    "precommit": "pretty-quick --staged && npm run tslint",
+    "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(\\.(test|spec))\\.(ts|tsx)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "collectCoverageFrom": [
+      "client/**/*.ts"
+    ]
   },
   "dependencies": {
     "@material-ui/icons": "1.0.0-beta.42",
@@ -51,19 +66,24 @@
   },
   "devDependencies": {
     "@types/express": "4.11.1",
+    "@types/jest": "22.2.2",
     "@types/next": "2.4.9",
     "@types/next-redux-wrapper": "1.3.7",
+    "@types/node": "9.6.2",
     "@types/nprogress": "0.0.29",
     "@types/react": "16.3.6",
     "@types/react-intl": "2.3.6",
     "@types/redux-actions": "2.2.4",
     "@types/redux-form": "7.2.2",
     "@zeit/next-typescript": "0.1.1",
+    "coveralls": "3.0.0",
     "husky": "0.14.3",
+    "jest": "22.4.3",
     "nodemon": "1.17.3",
     "prettier": "1.11.1",
     "pretty-quick": "1.4.1",
     "rimraf": "2.6.2",
+    "ts-jest": "22.4.2",
     "ts-node": "5.0.1",
     "tslint": "5.9.1",
     "tslint-config-prettier": "1.10.0",
