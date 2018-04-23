@@ -22,6 +22,7 @@
     "prettier:show": "prettier --list-different \"./**/*\"",
     "prettier:write": "prettier \"./**/*\" --write",
     "precommit": "pretty-quick --staged && npm run tslint",
+    "test": "jest",
     "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "jest": {
