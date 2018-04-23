@@ -4,6 +4,7 @@
 * Do you want to start with React?
 * Do you want to start with Material Design?
 * Do you want to start with Redux?
+* Do you want to start with GraphQL?
 * ...with Typescript
 
 ## Download
@@ -32,14 +33,16 @@ go to: [http://localhost:8080](http://localhost:8080)
 * **Next.js** 5.1.x
 * **GraphQL** 0.13.x
 * **Apollo** 2.1.x
-* **Material-ui** beta.41
-* **Redux** 3.7.x
+* **Material-ui** beta.43
+* **Redux** 4.x
 * **Redux-form** 7.3.x
 * **React-intl** 2.4.x
+* *... go to package.json*
 
 ## Tools
 
+* **CircleCI**
 * **Nodemon**
 * **Prettier**
 * **TSLint**
-
+* **Coveralls**
