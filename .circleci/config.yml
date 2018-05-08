@@ -68,6 +68,13 @@ jobs:
           name: Init Helm
           command: helm init --client-only
       - run:
+          name: Set Helm chart version
+          command: sed -e "s/\${HELM_VERSION}/${CIRCLE_SHA1}/g" Chart.yaml > Chart.yaml
+          working_directory: .helm/aldo
+      - run:
+          name: Show Chart.yaml
+          command: cat .helm/aldo/Chart.yaml
+      - run:
           name: Install Helm
           command: mkdir dist && helm package aldo/ -d dist/
           working_directory: .helm
