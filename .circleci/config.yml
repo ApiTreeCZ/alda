@@ -125,13 +125,7 @@ jobs:
           command: helm repo update
       - run:
           name: Upgrade or install to Google Cloud
-          command: helm upgrade --install --wait ${CIRCLE_PROJECT_REPONAME}-dev apitree/${CIRCLE_PROJECT_REPONAME} --devel --namespace ${CIRCLE_PROJECT_REPONAME}-dev --set \
-            image.tag=${CIRCLE_TAG:1},\
-            image.repositoryUrl=${JFROG_DOCKER_REPO},\
-            image.pullSecrets.server=${JFROG_DOCKER_REPO},\
-            image.pullSecrets.username=${JFROG_USER},\
-            image.pullSecrets.password=${JFROG_PASS},\
-            image.pullSecrets.email=${JFROG_EMAIL}
+          command: helm upgrade --install --wait ${CIRCLE_PROJECT_REPONAME}-dev apitree/${CIRCLE_PROJECT_REPONAME} --devel --namespace ${CIRCLE_PROJECT_REPONAME}-dev --set image.tag=${CIRCLE_TAG:1},image.repositoryUrl=${JFROG_DOCKER_REPO},image.pullSecrets.server=${JFROG_DOCKER_REPO},image.pullSecrets.username=${JFROG_USER},image.pullSecrets.password=${JFROG_PASS},image.pullSecrets.email=${JFROG_EMAIL}
 
 workflows:
   version: 2
