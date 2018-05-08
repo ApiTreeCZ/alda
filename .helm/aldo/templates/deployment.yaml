@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: aldo-deployment
+  name: {{ .Chart.Name }}-deployment
   labels:
-    app: aldo
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: aldo
+  replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        app: aldo
+        app: {{ .Chart.Name }}
+        release: {{ .Release.Name }}
     spec:
       containers:
-      - name: aldo
-        image: apitree-docker-local.jfrog.io/aldo:0.1.0-alpha.2w38w37q
+      - name: {{ .Chart.Name }}
+        image: {{ required "Value image.repositoryUrl is not set!" .Values.image.repositoryUrl }}/{{ .Chart.Name }}:{{ required "Value image.tag is not set!" .Values.image.tag }}
         env:
         - name: PORT
           value: "8080"

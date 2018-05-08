@@ -44,10 +44,10 @@ jobs:
       - checkout
       - run:
           name: Docker login
-          command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} ${DOCKER_URL}
+          command: docker login -u ${JFROG_USER} -p ${JFROG_PASS} ${JFROG_DOCKER_REPO}
       - run:
           name: Set docker image to workspace
-          command: mkdir -p workspace && echo "${DOCKER_URL}/${CIRCLE_PROJECT_REPONAME}" > workspace/docker-image
+          command: mkdir -p workspace && echo "${JFROG_DOCKER_REPO}/${CIRCLE_PROJECT_REPONAME}" > workspace/docker-image
       - run:
           name: Show docker image
           command: cat workspace/docker-image
@@ -68,14 +68,17 @@ jobs:
           name: Init Helm
           command: helm init --client-only
       - run:
-          name: Set Helm chart version
-          command: sed -i -e "s/\${HELM_VERSION}/${CIRCLE_SHA1}/g" .helm/aldo/Chart.yaml
+          name: Set Helm Chart version
+          command: sed -i -e "s/\${HELM_VERSION}/${CIRCLE_TAG:1}/g" .helm/aldo/Chart.yaml
       - run:
           name: Show Chart.yaml
           command: cat .helm/aldo/Chart.yaml
       - run:
-          name: Install Helm
+          name: Package Helm Chart
           command: mkdir .helm/dist && helm package .helm/aldo/ -d .helm/dist/
+      - run:
+          name: Deploy Helm Chart
+          command: curl -u ${JFROG_USER}:${JFROG_PASS} -T .helm/dist/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz "${JFROG_HELM_REPO}/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz"
 
 workflows:
   version: 2
@@ -87,7 +90,8 @@ workflows:
             tags:
               only: /v[0-9]+(\.[0-9]+)*(-.+)?/
             branches:
-              ignore: /.*/
+              only:
+                - dev
       - create_docker_image:
           context: apitree-aldo-context
           requires:
@@ -99,3 +103,10 @@ workflows:
               ignore: /.*/
       - deploy_helm_chart:
           context: apitree-aldo-context
+          requires:
+            - create_docker_image
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*(-.+)?/
+            branches:
+              ignore: /.*/
