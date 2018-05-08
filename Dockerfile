@@ -1,4 +1,4 @@
-FROM node:carbon
+FROM node:9
 
 MAINTAINER Ales Dostal <a.dostal@apitree.cz>
 
@@ -11,7 +11,7 @@ COPY . /usr/src/app
 RUN npm install
 
 # Delete .npmrc. It is needed for npm install, but contains private key to NPM repository and we don't want to leave that in a docker image.
-RUN rm .npmrc
+#RUN rm .npmrc
 
 # Build application, because Next.js have random HASH and BULD_ID
 RUN cd /usr/src/app && npm run build
