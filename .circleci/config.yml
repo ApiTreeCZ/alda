@@ -69,7 +69,7 @@ jobs:
           command: helm init --client-only
       - run:
           name: Set Helm Chart version
-          command: sed -i -e "s/\${HELM_VERSION}/${CIRCLE_TAG:1}/g" .helm/aldo/Chart.yaml
+          command: sed -i -e "s/\${HELM_VERSION}/0.1.0-alpha.3/g" .helm/aldo/Chart.yaml
       - run:
           name: Show Chart.yaml
           command: cat .helm/aldo/Chart.yaml
@@ -77,8 +77,11 @@ jobs:
           name: Package Helm Chart
           command: mkdir .helm/dist && helm package .helm/aldo/ -d .helm/dist/
       - run:
+          name: Install curl
+          command: apk update && apk add curl curl-dev bash
+      - run:
           name: Deploy Helm Chart
-          command: curl -u ${JFROG_USER}:${JFROG_PASS} -T .helm/dist/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz "${JFROG_HELM_REPO}/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz"
+          command: curl -u ${JFROG_USER}:${JFROG_PASS} -T .helm/dist/${CIRCLE_PROJECT_REPONAME}-0.1.0-alpha.3.tgz "${JFROG_HELM_REPO}/${CIRCLE_PROJECT_REPONAME}-0.1.0-alpha.3.tgz"
 
 workflows:
   version: 2
@@ -90,8 +93,7 @@ workflows:
             tags:
               only: /v[0-9]+(\.[0-9]+)*(-.+)?/
             branches:
-              only:
-                - dev
+              ignore: /.*/
       - create_docker_image:
           context: apitree-aldo-context
           requires:
@@ -103,10 +105,10 @@ workflows:
               ignore: /.*/
       - deploy_helm_chart:
           context: apitree-aldo-context
-          requires:
-            - create_docker_image
+#          requires:
+#            - create_docker_image
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*(-.+)?/
-            branches:
-              ignore: /.*/
+#            branches:
+#              ignore: /.*/
