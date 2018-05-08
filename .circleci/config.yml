@@ -88,6 +88,7 @@ jobs:
       - image: google/cloud-sdk
     working_directory: ~/gc
     steps:
+      - checkout
       - run:
           name: Store Service Account
           command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
@@ -108,8 +109,15 @@ jobs:
           command: kubectl get namespaces
       - run:
           name: Install Helm
-          command: chmod +x install-helm.sh && ./install-helm.sh
-          working_directory: .circleci
+          command: |
+            HELM_URL=https://storage.googleapis.com/kubernetes-helm
+            HELM_TARBALL=helm-v2.8.1-linux-amd64.tar.gz
+            STABLE_REPO_URL=https://kubernetes-charts.storage.googleapis.com/
+            INCUBATOR_REPO_URL=https://kubernetes-charts-incubator.storage.googleapis.com/
+            wget -q ${HELM_URL}/${HELM_TARBALL}
+            tar xzfv ${HELM_TARBALL}
+            cp ./linux-amd64/helm /usr/local/bin/helm
+            helm init --client-only
       - run:
           name: Test helm
           command: helm version
