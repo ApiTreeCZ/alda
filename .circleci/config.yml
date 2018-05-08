@@ -69,15 +69,15 @@ workflows:
   version: 2
   build:
     jobs:
-      - build:
+#      - build:
+#          context: apitree-aldo-context
+#          filters:
+#            tags:
+#              only: /v[0-9]+(\.[0-9]+)*(-.+)?/
+      - create_docker_image:
           context: apitree-aldo-context
-          filters:
-            tags:
-              only: /v[0-9]+(\.[0-9]+)*(-.+)?/
-      - dev_create_docker_image:
-          context: apitree-aldo-context
-          requires:
-            - build
+#          requires:
+#            - build
           filters:
             branches:
               only:
