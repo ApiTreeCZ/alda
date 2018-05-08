@@ -69,7 +69,7 @@ jobs:
           command: helm init --client-only
       - run:
           name: Install Helm
-          command: mdkir dist && helm package aldo/ -d dist/
+          command: mkdir dist && helm package aldo/ -d dist/
           working_directory: .helm
 
 workflows:
