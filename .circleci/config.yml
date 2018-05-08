@@ -59,14 +59,14 @@ jobs:
           command: docker push $(cat workspace/docker-image)
 
   deploy_helm_chart:
+    docker:
+      - image: lachlanevenson/k8s-helm:latest
     working_directory: ~/helm
-    machine: true
     steps:
       - checkout
       - run:
-          name: Install Helm
-          command: chmod +x install-helm.sh && ./install-helm.sh
-          working_directory: .helm
+          name: Init Helm
+          command: helm init --client-only
       - run:
           name: Install Helm
           command: mdkir dist && helm package aldo/ -d dist/
