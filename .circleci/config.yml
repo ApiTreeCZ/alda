@@ -83,6 +83,18 @@ jobs:
           name: Deploy Helm Chart
           command: curl -u ${JFROG_USER}:${JFROG_PASS} -T .helm/dist/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz "${JFROG_HELM_REPO}/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz"
 
+  deploy_google_cloud_kubernetes:
+    docker:
+      - image: google/cloud-sdk
+    working_directory: ~/gc
+    steps:
+      - run:
+          name: Store Service Account
+          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+      - run:
+          name: Test gcloud
+          command: gcloud info
+
 workflows:
   version: 2
   build:
@@ -94,7 +106,7 @@ workflows:
               only: /v[0-9]+(\.[0-9]+)*(-.+)?/
             branches:
               only:
-                - dev
+                - dev-xxx
       - create_docker_image:
           context: apitree-aldo-context
           requires:
@@ -113,3 +125,12 @@ workflows:
               only: /v[0-9]+(\.[0-9]+)*(-.+)?/
             branches:
               ignore: /.*/
+      - deploy_google_cloud_kubernetes:
+          context: apitree-aldo-context
+#          requires:
+#            - deploy_helm_chart
+          filters:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*(-.+)?/
+#            branches:
+#              ignore: /.*/
