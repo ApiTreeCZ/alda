@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "aldo.fullname" . }}
+  name: {{ template "aldo.fullname" . }}-deployment
   labels:
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
