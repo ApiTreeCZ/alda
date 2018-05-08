@@ -147,7 +147,7 @@ workflows:
               only: /v[0-9]+(\.[0-9]+)*(-.+)?/
             branches:
               only:
-                - dev-xxx
+                - dev
       - create_docker_image:
           context: apitree-aldo-context
           requires:
