@@ -1,5 +1,10 @@
 replicaCount: 2
 
 image:
-  repositoryUrl: apitree-docker-local.jfrog.io
+  repositoryUrl:
   tag:
+  pullSecrets:
+    server:
+    username:
+    password:
+    email:

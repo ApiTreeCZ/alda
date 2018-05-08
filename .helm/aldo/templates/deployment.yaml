@@ -1,26 +1,29 @@
-apiVersion: apps/v1
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-deployment
+  name: {{ template "aldo.fullname" . }}
   labels:
-    release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app: {{ template "aldo.name" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: {{ template "aldo.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
-      - name: {{ .Chart.Name }}
-        image: {{ required "Value image.repositoryUrl is not set!" .Values.image.repositoryUrl }}/{{ .Chart.Name }}:{{ required "Value image.tag is not set!" .Values.image.tag }}
-        env:
-        - name: PORT
-          value: "8080"
-        - name: NODE_ENV
-          value: "production"
-        ports:
-        - containerPort: 8080
+        - name: {{ .Chart.Name }}
+          image: {{ required "Value image.repositoryUrl is not set!" .Values.image.repositoryUrl }}/{{ .Chart.Name }}:{{ required "Value image.tag is not set!" .Values.image.tag }}
+          env:
+          - name: PORT
+            value: "8080"
+          - name: NODE_ENV
+            value: "production"
+          ports:
+          - containerPort: 8080
+      imagePullSecrets:
+      - name: image-secret

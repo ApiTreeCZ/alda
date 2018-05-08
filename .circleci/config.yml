@@ -69,13 +69,13 @@ jobs:
           command: helm init --client-only
       - run:
           name: Set Helm Chart version
-          command: sed -i -e "s/\${HELM_VERSION}/${CIRCLE_TAG:1}/g" .helm/aldo/Chart.yaml
+          command: sed -i -e "s/\${HELM_VERSION}/${CIRCLE_TAG:1}/g" .helm/${CIRCLE_PROJECT_REPONAME}/Chart.yaml
       - run:
           name: Show Chart.yaml
-          command: cat .helm/aldo/Chart.yaml
+          command: cat .helm/${CIRCLE_PROJECT_REPONAME}/Chart.yaml
       - run:
           name: Package Helm Chart
-          command: mkdir .helm/dist && helm package .helm/aldo/ -d .helm/dist/
+          command: mkdir .helm/dist && helm package .helm/${CIRCLE_PROJECT_REPONAME}/ -d .helm/dist/
       - run:
           name: Install curl
           command: apk update && apk add curl curl-dev bash
@@ -111,7 +111,7 @@ jobs:
           name: Install Helm
           command: |
             HELM_URL=https://storage.googleapis.com/kubernetes-helm
-            HELM_TARBALL=helm-v2.8.1-linux-amd64.tar.gz
+            HELM_TARBALL=helm-v2.9.0-linux-amd64.tar.gz
             STABLE_REPO_URL=https://kubernetes-charts.storage.googleapis.com/
             INCUBATOR_REPO_URL=https://kubernetes-charts-incubator.storage.googleapis.com/
             apt update
@@ -121,8 +121,20 @@ jobs:
             cp ./linux-amd64/helm /usr/local/bin/helm
             helm init --client-only
       - run:
-          name: Test helm
-          command: helm version
+          name: Add helm repository
+          command: helm repo add --username ${JFROG_USER} --password ${JFROG_PASS} apitree ${JFROG_HELM_REPO}
+      - run:
+          name: Helm repo update
+          command: helm repo update
+      - run:
+          name: Upgrade or install to Google Cloud
+          command: helm upgrade --install --wait ${CIRCLE_PROJECT_REPONAME}-dev apitree/${CIRCLE_PROJECT_REPONAME} --devel --namespace ${CIRCLE_PROJECT_REPONAME}-dev --set \
+            image.tag=${CIRCLE_TAG:1},\
+            image.repositoryUrl=${JFROG_DOCKER_REPO},\
+            image.pullSecrets.server=${JFROG_DOCKER_REPO},\
+            image.pullSecrets.username=${JFROG_USER},\
+            image.pullSecrets.password=${JFROG_PASS},\
+            image.pullSecrets.email=${JFROG_EMAIL}
 
 workflows:
   version: 2
@@ -156,10 +168,10 @@ workflows:
               ignore: /.*/
       - deploy_google_cloud_kubernetes:
           context: apitree-aldo-context
-#          requires:
-#            - deploy_helm_chart
+          requires:
+            - deploy_helm_chart
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*(-.+)?/
-#            branches:
-#              ignore: /.*/
+            branches:
+              ignore: /.*/
