@@ -69,7 +69,7 @@ jobs:
           command: helm init --client-only
       - run:
           name: Set Helm chart version
-          command: sed -e "s/\${HELM_VERSION}/${CIRCLE_SHA1}/g" .helm/aldo/Chart.yaml > .helm/aldo/Chart.yaml
+          command: sed -e "s/\${HELM_VERSION}/1234/g" .helm/aldo/Chart.yaml > .helm/aldo/Chart.yaml
       - run:
           name: Show Chart.yaml
           command: cat .helm/aldo/Chart.yaml
