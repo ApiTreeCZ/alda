@@ -81,7 +81,7 @@ jobs:
           command: apk update && apk add curl curl-dev bash
       - run:
           name: Deploy Helm Chart
-          command: curl -u ${JFROG_USER}:${JFROG_PASS} -T .helm/dist/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz "${JFROG_HELM_REPO}/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz"
+          command: curl -u ${JFROG_USER}:${JFROG_PASS} -T .helm/dist/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz "${JFROG_HELM_REPO_LOCAL}/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz"
 
   deploy_google_cloud_kubernetes:
     docker:
@@ -104,9 +104,6 @@ jobs:
       - run:
           name: Set container cluster
           command: gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
-      - run:
-          name: Test kubectl
-          command: kubectl get namespaces
       - run:
           name: Install Helm
           command: |
