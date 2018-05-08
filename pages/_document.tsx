@@ -10,7 +10,7 @@ const minifier = postcss([cssnano]);
 
 class MainDocument extends Document {
     static async getInitialProps(ctx: any) {
-        const pageContext = StylesContext.getPageContext('light');
+        const pageContext = StylesContext.getPageContext({palette: {type: 'light'}});
         const page = ctx.renderPage((Component: any) => (props: any) => <Component pageContext={pageContext} {...props} />);
 
         let css = pageContext.sheetsRegistry.toString();

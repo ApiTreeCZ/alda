@@ -13,7 +13,6 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "skipLibCheck": true,
-    "outDir": "dist",
     "baseUrl": ".",
     "typeRoots": [
       "./node_modules/@types",
