@@ -107,6 +107,10 @@ jobs:
           name: Test kubectl
           command: kubectl get namespaces
       - run:
+          name: Install Helm
+          command: chmod +x install-helm.sh && ./install-helm.sh
+          working_directory: .circleci
+      - run:
           name: Test helm
           command: helm version
 
