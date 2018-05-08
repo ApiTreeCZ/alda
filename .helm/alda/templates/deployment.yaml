@@ -1,18 +1,18 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "aldo.fullname" . }}-deployment
+  name: {{ template "alda.fullname" . }}-deployment
   labels:
     heritage: {{ .Release.Service }}
     release: {{ .Release.Name }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
-    app: {{ template "aldo.name" . }}
+    app: {{ template "alda.name" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        app: {{ template "aldo.name" . }}
+        app: {{ template "alda.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:

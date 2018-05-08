@@ -30,7 +30,7 @@ class MainDocument extends Document {
         return (
             <html lang="en" dir="ltr">
                 <Head>
-                    <title>ALDO</title>
+                    <title>ALDA</title>
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="user-scalable=0, initial-scale=1, minimum-scale=1, width=device-width, height=device-height" />
                     <meta name="keywords" content="" />

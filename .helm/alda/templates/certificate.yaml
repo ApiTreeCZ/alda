@@ -1,9 +1,9 @@
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: {{ template "aldo.fullname" . }}-certificate
+  name: {{ template "alda.fullname" . }}-certificate
 spec:
-  secretName: {{ template "aldo.fullname" . }}-tls
+  secretName: {{ template "alda.fullname" . }}-tls
   issuerRef:
     name: letsencrypt-prod
   commonName: {{ required "Value domain is not set!" .Values.domain }}

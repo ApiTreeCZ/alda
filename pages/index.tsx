@@ -32,7 +32,7 @@ class Index extends React.Component<ConnectedState & ConnectedDispatch & OwnProp
             <PageContainer>
                 <Grid container>
                     <Grid item xs={12}>
-                        <Typography variant="display1">ALDO</Typography>
+                        <Typography variant="display1">ALDA</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="caption">

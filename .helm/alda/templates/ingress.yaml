@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-    name: {{ template "aldo.fullname" . }}-ingress
+    name: {{ template "alda.fullname" . }}-ingress
     annotations:
       kubernetes.io/tls-acme: "true"
       kubernetes.io/ingress.class: "nginx"
@@ -10,12 +10,12 @@ spec:
     tls:
     - hosts:
       - {{ required "Value domain is not set!" .Values.domain }}
-      secretName: {{ template "aldo.fullname" . }}-tls
+      secretName: {{ template "alda.fullname" . }}-tls
     rules:
       - host: {{ required "Value domain is not set!" .Values.domain }}
         http:
           paths:
             - backend:
-                serviceName: {{ template "aldo.fullname" . }}-service
+                serviceName: {{ template "alda.fullname" . }}-service
                 servicePort: 8080
               path: /

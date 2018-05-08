@@ -1,4 +1,4 @@
-# ALDO [![CircleCI](https://circleci.com/gh/ApiTreeCZ/aldo/tree/dev.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/ApiTreeCZ/aldo/tree/dev) [![Coverage Status](https://coveralls.io/repos/github/ApiTreeCZ/aldo/badge.svg?branch=dev)](https://coveralls.io/github/ApiTreeCZ/aldo?branch=dev)
+# ALDA [![CircleCI](https://circleci.com/gh/ApiTreeCZ/alda/tree/dev.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/ApiTreeCZ/alda/tree/dev) [![Coverage Status](https://coveralls.io/repos/github/ApiTreeCZ/alda/badge.svg?branch=dev)](https://coveralls.io/github/ApiTreeCZ/alda?branch=dev)
 > A boilerplate for React isomorphic aplication with Material Design, GraphQL, Redux, Redux Form and custom server
 
 * Do you want to start with React?
@@ -9,9 +9,9 @@
 
 ## Download
 
-[Download release source code](https://github.com/ApiTreeCZ/aldo/releases)
+[Download release source code](https://github.com/ApiTreeCZ/alda/releases)
 or
-[latest dev](https://github.com/ApiTreeCZ/aldo/archive/dev.zip)
+[latest dev](https://github.com/ApiTreeCZ/alda/archive/dev.zip)
 
 ## Usage
 
