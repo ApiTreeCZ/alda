@@ -104,11 +104,11 @@ jobs:
           name: Set container cluster
           command: gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
       - run:
-          name: Test gcloud
-          command: gcloud info
-      - run:
           name: Test kubectl
           command: kubectl get namespaces
+      - run:
+          name: Test helm
+          command: helm version
 
 workflows:
   version: 2
