@@ -23,7 +23,8 @@
     "prettier:write": "prettier \"./**/*\" --write",
     "precommit": "pretty-quick --staged && npm run tslint",
     "test": "jest",
-    "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+    "coverage": "jest --coverage",
+    "coverage-report": "npm run coverage && cat ./coverage/lcov.info | coveralls"
   },
   "jest": {
     "transform": {
