@@ -31,6 +31,9 @@ jobs:
           name: Run build
           command: npm run build
       - run:
+          name: Add Coveralls token
+          command: echo "${COVERALLS_REPO_TOKEN}" > .coveralls.yml
+      - run:
           name: Run test and coverage
           command: npm run coverage
 
