@@ -53,7 +53,7 @@ jobs:
           command: cat workspace/docker-image
       - run:
           name: Docker create image
-          command: docker build --build-arg GIT_COMMIT=${CIRCLE_SHA1} --build-arg BUILD_NUM=${CIRCLE_BUILD_NUM} --build-arg BUILD_AUTHOR=${CIRCLE_USERNAME} -t $(cat workspace/docker-image):${CIRCLE_TAG:1} .
+          command: docker build --build-arg --build-arg BUILD_NUM=${CIRCLE_BUILD_NUM} --build-arg BUILD_AUTHOR=${CIRCLE_USERNAME} -t $(cat workspace/docker-image):${CIRCLE_TAG:1} .
       - run:
           name: Docker push
           command: docker push $(cat workspace/docker-image)
@@ -75,10 +75,14 @@ jobs:
           command: cat .helm/${CIRCLE_PROJECT_REPONAME}/Chart.yaml
       - run:
           name: Package Helm Chart
-          command: mkdir .helm/dist && helm package .helm/${CIRCLE_PROJECT_REPONAME}/ -d .helm/dist/
+          command: |
+            mkdir .helm/dist
+            helm package .helm/${CIRCLE_PROJECT_REPONAME}/ -d .helm/dist/
       - run:
           name: Install curl
-          command: apk update && apk add curl curl-dev bash
+          command: |
+            apk update
+            apk add curl curl-dev bash
       - run:
           name: Deploy Helm Chart
           command: curl -u ${JFROG_USER}:${JFROG_PASS} -T .helm/dist/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz "${JFROG_HELM_REPO_LOCAL}/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz"
@@ -123,9 +127,14 @@ jobs:
       - run:
           name: Helm repo update
           command: helm repo update
-      - run:
+      - deploy:
           name: Upgrade or install to Google Cloud
-          command: helm upgrade --install --wait ${CIRCLE_PROJECT_REPONAME}-dev apitree/${CIRCLE_PROJECT_REPONAME} --devel --namespace ${CIRCLE_PROJECT_REPONAME}-dev --set image.tag=${CIRCLE_TAG:1},image.repositoryUrl=${JFROG_DOCKER_REPO},image.pullSecrets.server=${JFROG_DOCKER_REPO},image.pullSecrets.username=${JFROG_USER},image.pullSecrets.password=${JFROG_PASS},image.pullSecrets.email=${JFROG_EMAIL},domain=${DOMAIN}
+          command: |
+            HELM_RELEASE=${CIRCLE_PROJECT_REPONAME}-dev
+            HELM_CHART=apitree/${CIRCLE_PROJECT_REPONAME}
+            K8S_NAMESPACE=${CIRCLE_PROJECT_REPONAME}-dev
+            HELM_ENV=image.tag=${CIRCLE_TAG:1},image.repositoryUrl=${JFROG_DOCKER_REPO},image.pullSecrets.server=${JFROG_DOCKER_REPO},image.pullSecrets.username=${JFROG_USER},image.pullSecrets.password=${JFROG_PASS},image.pullSecrets.email=${JFROG_EMAIL},domain=${DOMAIN}
+            helm upgrade --install --wait ${HELM_RELEASE} ${HELM_CHART} --devel --namespace ${K8S_NAMESPACE} --set ${HELM_ENV}
 
 workflows:
   version: 2
