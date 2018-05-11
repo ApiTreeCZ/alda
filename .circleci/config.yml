@@ -53,7 +53,7 @@ jobs:
           command: cat workspace/docker-image
       - run:
           name: Docker create image
-          command: docker build --build-arg --build-arg BUILD_NUM=${CIRCLE_BUILD_NUM} --build-arg BUILD_AUTHOR=${CIRCLE_USERNAME} -t $(cat workspace/docker-image):${CIRCLE_TAG:1} .
+          command: docker build --build-arg BUILD_NUM=${CIRCLE_BUILD_NUM} --build-arg BUILD_AUTHOR=${CIRCLE_USERNAME} -t $(cat workspace/docker-image):${CIRCLE_TAG:1} .
       - run:
           name: Docker push
           command: docker push $(cat workspace/docker-image)
@@ -85,7 +85,9 @@ jobs:
             apk add curl curl-dev bash
       - run:
           name: Deploy Helm Chart
-          command: curl -u ${JFROG_USER}:${JFROG_PASS} -T .helm/dist/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz "${JFROG_HELM_REPO_LOCAL}/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz"
+          command: |
+            TGZ_FILENAME=${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz
+            curl -u ${JFROG_USER}:${JFROG_PASS} -T .helm/dist/${TGZ_FILENAME} "${JFROG_HELM_REPO_LOCAL}/${TGZ_FILENAME}"
 
   deploy_google_cloud_kubernetes:
     docker:
