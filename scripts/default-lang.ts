@@ -2,9 +2,18 @@ import {readFileSync, writeFileSync} from 'fs';
 import {resolve} from 'path';
 import {sync} from 'glob';
 
-const defaultMessages = sync('./lang/.messages/**/*.json')
-    .map((filename) => readFileSync(filename, 'utf8'))
-    .map((file) => JSON.parse(file))
+// lang directory
+const dir = './lang';
+
+// default locale
+const defaultLocale = 'en';
+
+const readMessages = (file: string) => JSON.parse(readFileSync(file, 'utf8'));
+const writeMessages = (file: string, content: any) => writeFileSync(file, JSON.stringify(content, null, 2));
+
+// get default messages from ./${dir}/.messages/*
+const defaultMessages = sync(`${dir}/.messages/**/*.json`)
+    .map((filename) => readMessages(filename))
     .reduce((messages, descriptors) => {
         descriptors.forEach(({id, defaultMessage}) => {
             if (messages.hasOwnProperty(id)) {
@@ -15,6 +24,17 @@ const defaultMessages = sync('./lang/.messages/**/*.json')
         return messages;
     }, {});
 
-writeFileSync('./lang/en.json', JSON.stringify(defaultMessages, null, 2));
+const defaultLangFile = `${dir}/${defaultLocale}.json`;
+
+// save default messages to default lang file
+writeMessages(defaultLangFile, defaultMessages);
+
+// merge default messages with other languages files
+sync(`${dir}/*.json`)
+    .filter((f) => f !== defaultLangFile)
+    .forEach((file) => {
+        writeMessages(file, {...defaultMessages, ...readMessages(file)});
+    });
+
 // tslint:disable-next-line
-console.log(`> Wrote default messages to: "${resolve('./lang/en.json')}"`);
+console.log(`> Wrote default messages to: "${resolve(defaultLangFile)}"`);

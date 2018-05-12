@@ -1,0 +1,8 @@
+{
+  "title": "ALDA",
+  "about.description": "React aplikace použivající Material Design, GraphQL, Redux, Redux Form a vlastní server",
+  "about.questions.startWithReact": "Chcete začít používat React?",
+  "about.questions.startWithMD": "Chcete začít používat Material Design?",
+  "about.questions.startWithRedux": "Chcete začít používat Redux?",
+  "about.withTypescript": "...plus TypeScript"
+}

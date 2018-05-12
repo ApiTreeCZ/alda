@@ -1,4 +1,8 @@
 [
   {"id": "title", "defaultMessage": "ALDA"},
-  {"id": "description", "defaultMessage": "A boilerplate for React isomorphic aplication with Material Design, GraphQL, Redux, Redux Form and custom server"}
+  {"id": "about.description", "defaultMessage": "A boilerplate for React isomorphic aplication with Material Design, GraphQL, Redux, Redux Form and custom server"},
+  {"id": "about.questions.startWithReact", "defaultMessage": "Do you want to start with React?"},
+  {"id": "about.questions.startWithMD", "defaultMessage": "Do you want to start with Material Design?"},
+  {"id": "about.questions.startWithRedux", "defaultMessage": "Do you want to start with Redux?"},
+  {"id": "about.withTypescript", "defaultMessage": "...with TypeScript"}
 ]

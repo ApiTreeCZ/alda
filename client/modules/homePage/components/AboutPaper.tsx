@@ -11,16 +11,21 @@ const decorate = withStyles((theme) => ({
     },
 }));
 
-// FIXME - rewrite by react-intl
-const questions = ['Do you want to start with React?', 'Do you want to start with Material Design?', 'Do you want to start with Redux?'];
+const questions = Object.values(Lang.ABOUT.QUESTIONS);
 
 export const AboutPaper = decorate<Props>(({classes}) => {
     return (
         <Paper className={classes.root}>
-            <FormattedMessage id={Lang.DESCRIPTION}>{(msg) => <Typography variant="subheading">{msg}</Typography>}</FormattedMessage>
+            <FormattedMessage id={Lang.ABOUT.DESCRIPTION}>{(msg) => <Typography variant="subheading">{msg}</Typography>}</FormattedMessage>
             <FormControl component="fieldset">
-                <FormGroup>{questions.map((row) => <FormControlLabel key={row} control={<Checkbox checked />} label={`* ${row}`} />)}</FormGroup>
-                <FormHelperText>...with Typescript</FormHelperText>
+                <FormGroup>
+                    {questions.map((row) => (
+                        <FormattedMessage id={row} key={row}>
+                            {(msg) => <FormControlLabel control={<Checkbox checked />} label={msg} />}
+                        </FormattedMessage>
+                    ))}
+                </FormGroup>
+                <FormattedMessage id={Lang.ABOUT.WITH_TYPESCRIPT}>{(msg) => <FormHelperText>{msg}</FormHelperText>}</FormattedMessage>
             </FormControl>
         </Paper>
     );

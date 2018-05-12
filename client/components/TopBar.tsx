@@ -40,17 +40,17 @@ export const TopBar = decorate<Props>(({gitHubUrl, classes, locale, paletteType,
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={onClickOpenLeftMenu}>
                 <MenuIcon />
             </IconButton>
-            <Link href={'/'}>
-                <FormattedMessage id={Lang.TITLE}>
-                    {(msg) => (
+            <FormattedMessage id={Lang.TITLE}>
+                {(msg) => (
+                    <Link href={'/'}>
                         <Typography variant="title" color="inherit" className={classes.title}>
                             {msg}
                         </Typography>
-                    )}
-                </FormattedMessage>
-            </Link>
+                    </Link>
+                )}
+            </FormattedMessage>
             <div className={classes.flex} />
-            <Typography>{locale}</Typography>
+            <Typography>{locale && locale.toUpperCase()}</Typography>
             <IconButton color="inherit" onClick={onChangeTheme}>
                 {paletteType === 'light' ? <LightbulbOutline /> : <LightbublFullIcon />}
             </IconButton>
