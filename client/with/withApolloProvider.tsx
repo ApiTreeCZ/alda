@@ -6,12 +6,11 @@ import {InMemoryCache} from 'apollo-client-preset';
 import {ApolloClient} from 'apollo-client';
 import {HttpLink} from 'apollo-link-http';
 import * as fetch from 'isomorphic-fetch';
-import {Store} from '../Store';
 
 declare const process: any;
 
 // tslint:disable-next-line
-const createErrorLink = (_: ApolloClient<any>, _dispatch: Dispatch<Store>) =>
+const createErrorLink = (_: ApolloClient<any>, _dispatch: Dispatch) =>
     onError(() => {
         // TODO handle GraphQL errors
     });
@@ -23,14 +22,14 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-const createClient = (dispatch: Dispatch<Store>) => {
+const createClient = (dispatch: Dispatch) => {
     client.link = createErrorLink(client, dispatch).concat(client.link as any) as any;
     return client;
 };
 
 export const withApolloProvider = (Page: React.ComponentClass & {getInitialProps?: (ctx) => any}): React.ComponentClass<any> => {
     interface ConnectedDispatch {
-        readonly dispatch: Dispatch<Store>;
+        readonly dispatch: Dispatch;
     }
 
     class PageWithApollo extends React.Component<any> {

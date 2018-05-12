@@ -20,5 +20,5 @@ Router.onRouteChangeError = () => NProgress.done();
  * @param mapStateToProps mapping redux store to component props
  * @param mapDispatchToProps mapping actions to component props
  */
-export const app = (mapStateToProps, mapDispatchToProps) => (Component: React.ComponentClass) =>
+export const app = (mapStateToProps?, mapDispatchToProps?) => (Component: React.ComponentClass) =>
     withRedux(createStore, mapStateToProps, mapDispatchToProps)(compose(withApolloProvider, withIntl, withMaterialUi)(Component));

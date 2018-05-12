@@ -134,7 +134,7 @@ jobs:
           command: |
             HELM_RELEASE=${CIRCLE_PROJECT_REPONAME}-dev
             HELM_CHART=apitree/${CIRCLE_PROJECT_REPONAME}
-            K8S_NAMESPACE=${CIRCLE_PROJECT_REPONAME}-dev
+            K8S_NAMESPACE=${HELM_RELEASE}
             HELM_ENV=image.tag=${CIRCLE_TAG:1},image.repositoryUrl=${JFROG_DOCKER_REPO},image.pullSecrets.server=${JFROG_DOCKER_REPO},image.pullSecrets.username=${JFROG_USER},image.pullSecrets.password=${JFROG_PASS},image.pullSecrets.email=${JFROG_EMAIL},domain=${DOMAIN}
             helm upgrade --install --wait ${HELM_RELEASE} ${HELM_CHART} --devel --namespace ${K8S_NAMESPACE} --set ${HELM_ENV}
 

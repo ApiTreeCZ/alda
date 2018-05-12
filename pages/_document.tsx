@@ -40,6 +40,12 @@ class MainDocument extends Document {
                     {/*<link rel="icon" type="image/x-icon" href="/static/images/favicon.ico"/>*/}
                     <link rel="stylesheet" href="/static/nprogress/nprogress.css" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+                    <link
+                        rel="stylesheet"
+                        href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+                        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+                        crossOrigin="anonymous"
+                    />
                 </Head>
                 <body>
                     <Main />
