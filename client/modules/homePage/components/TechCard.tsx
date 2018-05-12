@@ -1,5 +1,6 @@
 import React from 'react';
 import {Paper, Typography, withStyles} from 'material-ui';
+import {FormattedMessage} from 'react-intl';
 
 interface Props {
     readonly imgSrc: string;
@@ -26,7 +27,7 @@ export const TechCard = decorate<Props>(({classes, imgSrc, title, description}) 
             <Typography gutterBottom variant="headline" component="h2">
                 {title}
             </Typography>
-            <Typography component="p">{description}</Typography>
+            <FormattedMessage id={description}>{(msg) => <Typography component="p">{msg}</Typography>}</FormattedMessage>
         </div>
     </Paper>
 ));

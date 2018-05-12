@@ -4,5 +4,12 @@
   "about.questions.startWithReact": "Chcete začít používat React?",
   "about.questions.startWithMD": "Chcete začít používat Material Design?",
   "about.questions.startWithRedux": "Chcete začít používat Redux?",
-  "about.withTypescript": "...plus TypeScript"
+  "about.withTypescript": "...plus TypeScript",
+  "tech.react": "JavaScript knihovna pro psaní uživatelského rozhraní",
+  "tech.md": "Tvořte své projekty hezky a rychle",
+  "tech.redux": "Předvídatelný stavový kontejner",
+  "tech.graphql": "Dotazovací jazyk pro tvé API",
+  "tech.apollo": "Nástroj pro GraphQL",
+  "tech.ts": "JavaScript s typy",
+  "tech.nextjs": "Framework pro server side rendering aplikace"
 }

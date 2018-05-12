@@ -50,7 +50,7 @@ export const TopBar = decorate<Props>(({gitHubUrl, classes, locale, paletteType,
                 )}
             </FormattedMessage>
             <div className={classes.flex} />
-            <Typography>{locale && locale.toUpperCase()}</Typography>
+            <Typography color="inherit">{locale && locale.toUpperCase()}</Typography>
             <IconButton color="inherit" onClick={onChangeTheme}>
                 {paletteType === 'light' ? <LightbulbOutline /> : <LightbublFullIcon />}
             </IconButton>

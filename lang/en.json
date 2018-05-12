@@ -4,5 +4,12 @@
   "about.questions.startWithReact": "Do you want to start with React?",
   "about.questions.startWithMD": "Do you want to start with Material Design?",
   "about.questions.startWithRedux": "Do you want to start with Redux?",
-  "about.withTypescript": "...with TypeScript"
+  "about.withTypescript": "...with TypeScript",
+  "tech.react": "A JavaScript library for building user interfaces",
+  "tech.md": "Make beautiful products, faster",
+  "tech.redux": "Predictable state container",
+  "tech.graphql": "A query language for your API",
+  "tech.apollo": "Tools for GraphQL",
+  "tech.ts": "JavaScript that scales",
+  "tech.nextjs": "Framework for server-rendered React apps"
 }

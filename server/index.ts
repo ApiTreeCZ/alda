@@ -65,6 +65,7 @@ app.prepare().then(() => {
     });
 
     server.get('*', (req: any, res) => {
+        // When you change language other way (with browser settings is now), you must rewrite get locale from client on this code row
         const locale = accepts(req).language(languages);
         req.locale = locale;
         req.localeDataScript = getLocaleDataScript(locale);

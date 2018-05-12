@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Grid} from 'material-ui';
 import {AboutPaper, TechCard} from '../components';
+import {Lang} from '../../../Lang';
 
 interface Props {}
 
@@ -11,13 +12,13 @@ interface Technology {
 }
 
 const technologies: Technology[] = [
-    {imgSrc: '/static/images/react.png', title: 'React', description: 'A JavaScript library for building user interfaces'},
-    {imgSrc: '/static/images/material-design.png', title: 'Material Design', description: 'Make beautiful products, faster'},
-    {imgSrc: '/static/images/redux.png', title: 'Redux', description: 'Predictable state container'},
-    {imgSrc: '/static/images/graphql.png', title: 'GraphQL', description: 'A query language for your API'},
-    {imgSrc: '/static/images/apollo.png', title: 'Apollo', description: 'Tools for GraphQL'},
-    {imgSrc: '/static/images/ts.png', title: 'TypeScript', description: 'JavaScript that scales'},
-    {imgSrc: '/static/images/nextjs.jpeg', title: 'Next.js', description: 'Framework for server-rendered React apps'},
+    {imgSrc: '/static/images/react.png', title: 'React', description: Lang.TECH.REACT},
+    {imgSrc: '/static/images/material-design.png', title: 'Material Design', description: Lang.TECH.MD},
+    {imgSrc: '/static/images/redux.png', title: 'Redux', description: Lang.TECH.REDUX},
+    {imgSrc: '/static/images/graphql.png', title: 'GraphQL', description: Lang.TECH.GRAPHQL},
+    {imgSrc: '/static/images/apollo.png', title: 'Apollo', description: Lang.TECH.APOLLO},
+    {imgSrc: '/static/images/ts.png', title: 'TypeScript', description: Lang.TECH.TS},
+    {imgSrc: '/static/images/nextjs.jpeg', title: 'Next.js', description: Lang.TECH.NEXTJS},
 ];
 
 class Container extends React.Component<Props> {
