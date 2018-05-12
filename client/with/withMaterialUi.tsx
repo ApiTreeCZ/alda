@@ -4,7 +4,7 @@ import {CssBaseline, MuiThemeProvider} from 'material-ui';
 import {PageContext, StylesContext} from '../styles/StylesContext';
 import {AppFrame} from '../components';
 import {ThemeOptions} from 'material-ui/styles/createMuiTheme';
-import {ThemeAction, ThemeActionCreator} from '../actions';
+import {PageAction, PageActionCreator} from '../actions';
 import {Store} from '../Store';
 import {Dispatch} from 'redux';
 // tslint:disable-next-line
@@ -19,7 +19,7 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitial
         readonly themeOptions: ThemeOptions;
     }
 
-    interface ConnectedDispatch extends ThemeAction {}
+    interface ConnectedDispatch extends PageAction {}
 
     interface State {
         readonly prevProps?: OwnProps & ConnectedState;
@@ -97,7 +97,7 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitial
     }
 
     return connect<ConnectedState, ConnectedDispatch, OwnProps, any>(
-        ({theme: {themeOptions}}: Store) => ({themeOptions}),
-        (dispatch: Dispatch): ConnectedDispatch => ThemeActionCreator(dispatch),
+        ({page: {themeOptions}}: Store) => ({themeOptions}),
+        (dispatch: Dispatch): ConnectedDispatch => PageActionCreator(dispatch),
     )(Wrapper);
 };

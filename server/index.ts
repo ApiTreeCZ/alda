@@ -1,10 +1,38 @@
 import * as express from 'express';
 import * as nextjs from 'next';
+import {sync} from 'glob';
+import {basename} from 'path';
+import {readFileSync} from 'fs';
+import * as accepts from 'accepts';
+import * as IntlPolyfill from 'intl';
+
+Intl.NumberFormat = IntlPolyfill.NumberFormat;
+Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
 
 const dev: boolean = process.env.NODE_ENV !== 'production';
 
 const app = nextjs({dev});
 const handle = app.getRequestHandler();
+
+const languages = sync('./lang/*.json').map((f) => basename(f, '.json'));
+
+// We need to expose React Intl's locale data on the request for the user's
+// locale. This function will also cache the scripts by lang in memory.
+const localeDataCache = new Map();
+const getLocaleDataScript = (locale) => {
+    const lang = locale.split('-')[0];
+    if (!localeDataCache.has(lang)) {
+        const localeDataFile = require.resolve(`react-intl/locale-data/${lang}`);
+        const localeDataScript = readFileSync(localeDataFile, 'utf8');
+        localeDataCache.set(lang, localeDataScript);
+    }
+    return localeDataCache.get(lang);
+};
+
+// We need to load and expose the translations on the request for the user's
+// locale. These will only be used in production, in dev the `defaultMessage` in
+// each message description in the source code will be used.
+const getMessages = (locale) => require(`../lang/${locale}.json`);
 
 app.prepare().then(() => {
     const server = express();
@@ -36,7 +64,13 @@ app.prepare().then(() => {
         });
     });
 
-    server.get('*', (req, res) => handle(req, res));
+    server.get('*', (req: any, res) => {
+        const locale = accepts(req).language(languages);
+        req.locale = locale;
+        req.localeDataScript = getLocaleDataScript(locale);
+        req.messages = getMessages(locale);
+        return handle(req, res);
+    });
 
     const PORT = process.env.PORT || 8080;
     server.listen(PORT, (err: Error) => {

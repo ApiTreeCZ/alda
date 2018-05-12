@@ -1,1 +1,1 @@
-export * from './ThemeReducer';
+export * from './PageReducer';

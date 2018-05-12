@@ -1,1 +1,1 @@
-export * from './ThemeActions';
+export * from './PageActions';

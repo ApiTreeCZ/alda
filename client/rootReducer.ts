@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
 import {reducer as formReducer} from 'redux-form';
-import {ThemeReducer} from './reducers';
+import {PageReducer} from './reducers';
+import {InfoReducer} from './modules/info';
 
 export const rootReducer = combineReducers({
     form: formReducer,
-    theme: ThemeReducer,
+    page: PageReducer,
+    info: InfoReducer,
 });

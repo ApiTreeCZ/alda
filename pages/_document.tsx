@@ -19,14 +19,24 @@ class MainDocument extends Document {
             css = (await minifier.process(css, {from: undefined})).css;
         }
 
+        const {
+            req: {locale, localeDataScript},
+        } = ctx;
+
         return {
             ...page,
             pageContext,
+            locale,
+            localeDataScript,
             styles: <style id="jss-server-side" dangerouslySetInnerHTML={{__html: css}} />,
         };
     }
 
     render() {
+        const {locale, localeDataScript} = this.props;
+        // Polyfill Intl API for older browsers
+        const polyfill = `https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.${locale}`;
+
         return (
             <html lang="en" dir="ltr">
                 <Head>
@@ -40,6 +50,7 @@ class MainDocument extends Document {
                     {/*<link rel="icon" type="image/x-icon" href="/static/images/favicon.ico"/>*/}
                     <link rel="stylesheet" href="/static/nprogress/nprogress.css" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                     <link
                         rel="stylesheet"
                         href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
@@ -49,6 +60,8 @@ class MainDocument extends Document {
                 </Head>
                 <body>
                     <Main />
+                    <script src={polyfill} />
+                    <script dangerouslySetInnerHTML={{__html: localeDataScript}} />
                     <NextScript />
                 </body>
             </html>

@@ -1,18 +1,25 @@
 import * as React from 'react';
 import {AppBar, IconButton, PaletteType, Toolbar, Typography, withStyles} from 'material-ui';
 import {LightbulbOutline, Menu as MenuIcon} from '@material-ui/icons';
+import {FormattedMessage} from 'react-intl';
 import {LightbublFullIcon} from './LightbublFullIcon';
+import Link from 'next/link';
+import {Lang} from '../Lang';
 
 interface Props {
-    readonly title: string;
+    readonly locale: string;
     readonly gitHubUrl: string;
     readonly paletteType: PaletteType;
     readonly onChangeTheme: () => void;
+    readonly onClickOpenLeftMenu: () => void;
 }
 
 const decorate = withStyles((theme) => ({
     flex: {
         flex: 1,
+    },
+    title: {
+        cursor: 'pointer',
     },
     menuButton: {
         marginLeft: -12,
@@ -27,15 +34,23 @@ const decorate = withStyles((theme) => ({
     },
 }));
 
-export const TopBar = decorate<Props>(({title, gitHubUrl, classes, paletteType, onChangeTheme}) => (
+export const TopBar = decorate<Props>(({gitHubUrl, classes, locale, paletteType, onChangeTheme, onClickOpenLeftMenu}) => (
     <AppBar position="static">
         <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={onClickOpenLeftMenu}>
                 <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" className={classes.flex}>
-                {title}
-            </Typography>
+            <Link href={'/'}>
+                <FormattedMessage id={Lang.TITLE}>
+                    {(msg) => (
+                        <Typography variant="title" color="inherit" className={classes.title}>
+                            {msg}
+                        </Typography>
+                    )}
+                </FormattedMessage>
+            </Link>
+            <div className={classes.flex} />
+            <Typography>{locale}</Typography>
             <IconButton color="inherit" onClick={onChangeTheme}>
                 {paletteType === 'light' ? <LightbulbOutline /> : <LightbublFullIcon />}
             </IconButton>
