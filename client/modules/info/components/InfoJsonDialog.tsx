@@ -7,6 +7,7 @@ interface Props {
     readonly open: boolean;
     readonly data: InfoModel;
     readonly onClose: () => void;
+    readonly transition?: (props) => JSX.Element;
 }
 
 const decorate = withStyles((theme) => ({
@@ -15,9 +16,9 @@ const decorate = withStyles((theme) => ({
     },
 }));
 
-export const InfoJsonDialog = decorate<Props>(({open, data, onClose, classes}) => {
+export const InfoJsonDialog = decorate<Props>(({open, data, onClose, transition, classes}) => {
     return (
-        <Dialog open={open} onClose={onClose}>
+        <Dialog open={open} onClose={onClose} TransitionComponent={transition}>
             {open &&
                 data && (
                     <Fragment>

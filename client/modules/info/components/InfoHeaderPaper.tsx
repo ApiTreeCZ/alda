@@ -22,7 +22,7 @@ export const InfoHeaderPaper = decorate<Props>(({data, classes}) => {
                 {Object.keys(data)
                     .filter((f) => typeof data[f] === 'string')
                     .map((row) => (
-                        <Grid item xs={6} md={3} key={row}>
+                        <Grid item xs={12} md={6} lg={3} key={row}>
                             <List dense>
                                 <ListItem>
                                     <ListItemText primary={row} secondary={data[row]} />

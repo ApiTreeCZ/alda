@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Fragment} from 'react';
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
-import {Button, Grid, Typography} from 'material-ui';
+import {Button, Grid, Slide, Typography} from 'material-ui';
 import {OpenInBrowser as OpenInBrowserIcon, Refresh as RefreshIcon} from '@material-ui/icons';
 import {Store} from '../../../Store';
 import {InfoStore} from '../store';
@@ -18,6 +18,8 @@ interface ConnectedState {
 interface ConnectedDispatch extends InfoAction {}
 
 type Props = ConnectedState & ConnectedDispatch & OwnProps;
+
+const transition = (props) => <Slide direction="left" {...props} />;
 
 export class Container extends React.Component<Props> {
     componentDidMount(): void {
@@ -67,7 +69,7 @@ export class Container extends React.Component<Props> {
                         </Fragment>
                     )}
                 </Grid>
-                <InfoJsonDialog open={info.isOpenDialogJson} data={info.data} onClose={this.handleOnCloseDialogJson} />
+                <InfoJsonDialog open={info.isOpenDialogJson} data={info.data} onClose={this.handleOnCloseDialogJson} transition={transition} />
             </Fragment>
         );
     }

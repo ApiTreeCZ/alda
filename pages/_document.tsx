@@ -3,10 +3,11 @@ import Document, {Head, Main, NextScript} from 'next/document';
 import {StylesContext} from '../client/styles/StylesContext';
 import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
+// import cssnano from 'cssnano';
 
 const prefixer = postcss([autoprefixer]);
-const minifier = postcss([cssnano]);
+// FIXME cannot compile with cssnano
+// const minifier = postcss([cssnano]);
 
 class MainDocument extends Document {
     static async getInitialProps(ctx: any) {
@@ -16,7 +17,7 @@ class MainDocument extends Document {
         let css = pageContext.sheetsRegistry.toString();
         if (process.env.NODE_ENV === 'production') {
             css = (await prefixer.process(css, {from: undefined})).css;
-            css = (await minifier.process(css, {from: undefined})).css;
+            // css = (await minifier.process(css, {from: undefined})).css;
         }
 
         const {

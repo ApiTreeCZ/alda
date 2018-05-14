@@ -6,7 +6,7 @@ import * as NProgress from 'nprogress';
 import {withApolloProvider, withIntl, withMaterialUi} from './with';
 import {createStore} from './createStore';
 import {PageContainer} from './containers';
-import InjectedIntlProps = ReactIntl.InjectedIntlProps;
+import {InjectedIntlProps} from 'react-intl';
 
 NProgress.configure({parent: '#loadingContent'});
 

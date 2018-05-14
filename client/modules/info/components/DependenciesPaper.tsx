@@ -19,7 +19,7 @@ export const DependenciesPaper = decorate<Props>(({dependencies, classes}) => {
                     <Typography variant="title">Dependencies</Typography>
                 </Grid>
                 {Object.keys(dependencies).map((row) => (
-                    <Grid item xs={6} md={3} key={row}>
+                    <Grid item xs={12} md={6} lg={3} key={row}>
                         <List dense>
                             <ListItem>
                                 <ListItemText primary={row} secondary={dependencies[row]} />
