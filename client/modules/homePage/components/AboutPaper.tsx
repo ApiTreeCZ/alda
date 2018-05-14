@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, Paper, Typography, withStyles} from 'material-ui';
+import {Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, Paper, Typography, withStyles} from '@material-ui/core';
 import {FormattedMessage} from 'react-intl';
 import {Lang} from '../../../Lang';
 

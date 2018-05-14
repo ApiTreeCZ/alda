@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Fragment} from 'react';
-import {withStyles} from 'material-ui';
+import {withStyles} from '@material-ui/core';
 
 interface Props {}
 

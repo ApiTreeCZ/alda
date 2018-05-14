@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {CssBaseline, MuiThemeProvider} from 'material-ui';
+import {CssBaseline, MuiThemeProvider} from '@material-ui/core';
 import {PageContext, StylesContext} from '../styles/StylesContext';
 import {AppFrame} from '../components';
-import {ThemeOptions} from 'material-ui/styles/createMuiTheme';
+import {ThemeOptions} from '@material-ui/core/styles/createMuiTheme';
 import {PageAction, PageActionCreator} from '../actions';
 import {Store} from '../Store';
 import {Dispatch} from 'redux';

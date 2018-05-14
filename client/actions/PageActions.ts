@@ -1,5 +1,5 @@
 import {bindActionCreators, Dispatch} from 'redux';
-import {ThemeOptions} from 'material-ui/es/styles/createMuiTheme';
+import {ThemeOptions} from '@material-ui/core/styles/createMuiTheme';
 import {Action} from 'redux-actions';
 
 const PREFIX = 'THEME_';

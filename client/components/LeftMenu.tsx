@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Drawer, Icon, List, ListItem, ListItemIcon, ListItemText, withStyles} from 'material-ui';
+import {Drawer, Icon, List, ListItem, ListItemIcon, ListItemText, withStyles} from '@material-ui/core';
 import Link from 'next/link';
 
 interface Props {

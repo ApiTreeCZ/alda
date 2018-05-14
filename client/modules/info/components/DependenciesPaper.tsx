@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Grid, List, ListItem, ListItemText, Paper, Typography, withStyles} from 'material-ui';
+import {Grid, List, ListItem, ListItemText, Paper, Typography, withStyles} from '@material-ui/core';
 
 interface Props {
     readonly dependencies: {[key: string]: string};

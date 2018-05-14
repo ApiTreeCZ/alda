@@ -1,5 +1,5 @@
 import React from 'react';
-import {Paper, Typography, withStyles} from 'material-ui';
+import {Paper, Typography, withStyles} from '@material-ui/core';
 import {FormattedMessage} from 'react-intl';
 
 interface Props {

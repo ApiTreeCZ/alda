@@ -1,6 +1,6 @@
 import React from 'react';
-import {SvgIcon, withStyles} from 'material-ui';
-import {SvgIconProps} from 'material-ui/SvgIcon';
+import {SvgIcon, withStyles} from '@material-ui/core';
+import {SvgIconProps} from '@material-ui/core/SvgIcon';
 
 interface Props extends SvgIconProps {}
 

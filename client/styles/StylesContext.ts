@@ -1,6 +1,5 @@
-import {createMuiTheme, jssPreset} from 'material-ui';
-import {createGenerateClassName} from 'material-ui/styles';
-import {ThemeOptions} from 'material-ui/styles/createMuiTheme';
+import {createGenerateClassName, createMuiTheme, jssPreset} from '@material-ui/core';
+import {ThemeOptions} from '@material-ui/core/styles/createMuiTheme';
 
 // tslint:disable-next-line
 const {create, SheetsRegistry} = require('jss');

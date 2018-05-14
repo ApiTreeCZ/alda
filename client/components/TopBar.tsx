@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {AppBar, IconButton, PaletteType, Toolbar, Typography, withStyles} from 'material-ui';
+import {AppBar, IconButton, PaletteType, Toolbar, Typography, withStyles} from '@material-ui/core';
 import {LightbulbOutline, Menu as MenuIcon} from '@material-ui/icons';
 import {FormattedMessage} from 'react-intl';
 import {LightbublFullIcon} from './LightbublFullIcon';

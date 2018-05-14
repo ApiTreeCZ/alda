@@ -1,7 +1,7 @@
 import {Action, handleActions} from 'redux-actions';
 import {PageActionType as ActionType} from '../actions';
 import {PageStore as Store} from '../stores';
-import {ThemeOptions} from 'material-ui/styles/createMuiTheme';
+import {ThemeOptions} from '@material-ui/core/styles/createMuiTheme';
 
 const initialState = {
     themeOptions: {

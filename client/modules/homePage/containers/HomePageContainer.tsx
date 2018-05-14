@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Grid} from 'material-ui';
+import {Grid} from '@material-ui/core';
 import {AboutPaper, TechCard} from '../components';
 import {Lang} from '../../../Lang';
 

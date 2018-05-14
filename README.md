@@ -30,10 +30,10 @@ go to: [http://localhost:8080](http://localhost:8080)
 ## Libraries
 * **Typescript** 2.8.x
 * **React** 16.3.x
-* **Next.js** 5.1.x
+* **Next.js** 6.0.x
 * **GraphQL** 0.13.x
 * **Apollo** 2.1.x
-* **Material-ui** beta.43
+* **Material-UI** rc.0
 * **Redux** 4.x
 * **Redux-form** 7.3.x
 * **React-intl** 2.4.x

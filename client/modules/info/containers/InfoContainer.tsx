@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Fragment} from 'react';
 import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
-import {Button, Grid, Slide, Typography} from 'material-ui';
+import {Button, Grid, Slide, Typography} from '@material-ui/core';
 import {OpenInBrowser as OpenInBrowserIcon, Refresh as RefreshIcon} from '@material-ui/icons';
 import {Store} from '../../../Store';
 import {InfoStore} from '../store';
