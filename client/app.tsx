@@ -21,11 +21,9 @@ export interface AppProps extends InjectedIntlProps {}
 /**
  * Main boot of application, init Redux, Material-ui, etc.
  *
- * @param mapStateToProps mapping redux store to component props
- * @param mapDispatchToProps mapping actions to component props
  */
-export const app = (mapStateToProps?, mapDispatchToProps?) => (Component: React.ComponentType) =>
-    withRedux(createStore, mapStateToProps, mapDispatchToProps)(
+export const app = (Component: React.ComponentType) =>
+    withRedux(createStore)(
         compose(withApolloProvider, withIntl, withMaterialUi)((props) => (
             <PageContainer {...props}>
                 <Component />

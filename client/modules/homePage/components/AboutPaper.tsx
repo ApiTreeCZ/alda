@@ -11,12 +11,12 @@ const decorate = withStyles((theme) => ({
     },
 }));
 
-const questions = Object.values(Lang.ABOUT.QUESTIONS);
+const questions = [Lang.ABOUT_QUESTIONS_STARTWITHREACT, Lang.ABOUT_QUESTIONS_STARTWITHMD, Lang.ABOUT_QUESTIONS_STARTWITHREDUX];
 
 export const AboutPaper = decorate<Props>(({classes}) => {
     return (
         <Paper className={classes.root}>
-            <FormattedMessage id={Lang.ABOUT.DESCRIPTION}>{(msg) => <Typography variant="subheading">{msg}</Typography>}</FormattedMessage>
+            <FormattedMessage id={Lang.ABOUT_DESCRIPTION}>{(msg) => <Typography variant="subheading">{msg}</Typography>}</FormattedMessage>
             <FormControl component="fieldset">
                 <FormGroup>
                     {questions.map((row) => (
@@ -25,7 +25,7 @@ export const AboutPaper = decorate<Props>(({classes}) => {
                         </FormattedMessage>
                     ))}
                 </FormGroup>
-                <FormattedMessage id={Lang.ABOUT.WITH_TYPESCRIPT}>{(msg) => <FormHelperText>{msg}</FormHelperText>}</FormattedMessage>
+                <FormattedMessage id={Lang.ABOUT_WITHTYPESCRIPT}>{(msg) => <FormHelperText>{msg}</FormHelperText>}</FormattedMessage>
             </FormControl>
         </Paper>
     );

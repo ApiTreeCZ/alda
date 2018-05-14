@@ -10,6 +10,26 @@ import {Dispatch} from 'redux';
 // tslint:disable-next-line
 const JssProvider = require('react-jss/lib/JssProvider').default;
 
+export const getThemeOptions = (): ThemeOptions | undefined => {
+    try {
+        const find = localStorage.getItem('themeOptions');
+        if (find === null) {
+            return undefined;
+        }
+        return JSON.parse(find);
+    } catch (err) {
+        return undefined;
+    }
+};
+
+export const saveThemeOptions = (theme: ThemeOptions) => {
+    try {
+        localStorage.setItem('themeOptions', JSON.stringify(theme));
+    } catch (err) {
+        // nothing...
+    }
+};
+
 export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitialProps?(ctx: any): Promise<any>}) => {
     interface OwnProps {
         readonly pageContext: PageContext;

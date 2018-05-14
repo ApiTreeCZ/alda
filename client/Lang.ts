@@ -1,26 +1,16 @@
-const ABOUT = 'about';
-const ABOUT_QUESTIONS = `${ABOUT}.questions`;
-
-const TECH = 'tech';
-
+// This file is generated from scripts/default-lang.ts, dont modify, run npm run generate:lang
 export const Lang = {
     TITLE: 'title',
-    ABOUT: {
-        DESCRIPTION: `${ABOUT}.description`,
-        QUESTIONS: {
-            START_WITH_REACT: `${ABOUT_QUESTIONS}.startWithReact`,
-            START_WITH_MD: `${ABOUT_QUESTIONS}.startWithMD`,
-            START_WITH_REDUX: `${ABOUT_QUESTIONS}.startWithRedux`,
-        },
-        WITH_TYPESCRIPT: `${ABOUT}.withTypescript`,
-    },
-    TECH: {
-        REACT: `${TECH}.react`,
-        MD: `${TECH}.md`,
-        REDUX: `${TECH}.redux`,
-        GRAPHQL: `${TECH}.graphql`,
-        APOLLO: `${TECH}.apollo`,
-        TS: `${TECH}.ts`,
-        NEXTJS: `${TECH}.nextjs`,
-    },
+    ABOUT_DESCRIPTION: 'about.description',
+    ABOUT_QUESTIONS_STARTWITHREACT: 'about.questions.startWithReact',
+    ABOUT_QUESTIONS_STARTWITHMD: 'about.questions.startWithMD',
+    ABOUT_QUESTIONS_STARTWITHREDUX: 'about.questions.startWithRedux',
+    ABOUT_WITHTYPESCRIPT: 'about.withTypescript',
+    TECH_REACT: 'tech.react',
+    TECH_MD: 'tech.md',
+    TECH_REDUX: 'tech.redux',
+    TECH_GRAPHQL: 'tech.graphql',
+    TECH_APOLLO: 'tech.apollo',
+    TECH_TS: 'tech.ts',
+    TECH_NEXTJS: 'tech.nextjs',
 };

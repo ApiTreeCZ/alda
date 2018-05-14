@@ -8,6 +8,9 @@ const dir = './lang';
 // default locale
 const defaultLocale = 'en';
 
+// default Lang.ts file
+const defaultLangTsFile = './client/Lang.ts';
+
 const readMessages = (file: string) => JSON.parse(readFileSync(file, 'utf8'));
 const writeMessages = (file: string, content: any) => writeFileSync(file, JSON.stringify(content, null, 2));
 
@@ -28,6 +31,17 @@ const defaultLangFile = `${dir}/${defaultLocale}.json`;
 
 // save default messages to default lang file
 writeMessages(defaultLangFile, defaultMessages);
+
+// save Lang.ts
+const keys = Object.keys(defaultMessages);
+const langTsContent = `// This file is generated from scripts/default-lang.ts, dont modify, run npm run generate:lang
+${keys.reduce((acc, key, index) => {
+    const endLine = index + 1 === Object.keys(defaultMessages).length ? '' : '\n';
+    acc += `    ${key.toUpperCase().replace(',', '').replace(/\./g, '_')}: '${key}',${endLine}`;
+    return acc;
+}, 'export const Lang = {\n')}
+};\n`;
+writeFileSync(defaultLangTsFile, langTsContent);
 
 // merge default messages with other languages files
 sync(`${dir}/*.json`)
