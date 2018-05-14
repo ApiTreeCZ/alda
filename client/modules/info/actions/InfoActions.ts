@@ -3,14 +3,14 @@ import {Action} from 'redux-actions';
 
 const PREFIX = 'INFO_';
 
-const InfoActionType = {
+export const InfoActionType = {
     FETCHING_INFO: `${PREFIX}FETCHING_INFO`,
     FETCHED_INFO: `${PREFIX}FETCHED_INFO`,
     OPEN_DIALOG_JSON: `${PREFIX}OPEN_DIALOG_JSON`,
     CLOSE_DIALOG_JSON: `${PREFIX}CLOSE_DIALOG_JSON`,
 };
 
-interface InfoAction {
+export interface InfoAction {
     readonly fetchInfo: () => (dispatch: Dispatch) => void;
     readonly openDialogJson: () => Action<void>;
     readonly closeDialogJson: () => Action<void>;
@@ -30,6 +30,4 @@ const InfoActionDispatch: InfoAction = {
     closeDialogJson: () => ({type: InfoActionType.CLOSE_DIALOG_JSON}),
 };
 
-const InfoActionCreator = (dispatch: Dispatch) => bindActionCreators({...InfoActionDispatch}, dispatch);
-
-export {InfoActionType, InfoAction, InfoActionCreator};
+export const InfoActionCreator = (dispatch: Dispatch) => bindActionCreators({...InfoActionDispatch}, dispatch);
