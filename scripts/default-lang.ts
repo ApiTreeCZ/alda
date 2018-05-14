@@ -1,5 +1,4 @@
 import {readFileSync, writeFileSync} from 'fs';
-import {resolve} from 'path';
 import {sync} from 'glob';
 
 // lang directory
@@ -32,23 +31,31 @@ const defaultLangFile = `${dir}/${defaultLocale}.json`;
 // save default messages to default lang file
 writeMessages(defaultLangFile, defaultMessages);
 
+// tslint:disable-next-line
+console.log('\x1b[32m', `Wrote default messages to: "${defaultLangFile}"`);
+
 // save Lang.ts
 const keys = Object.keys(defaultMessages);
-const langTsContent = `// This file is generated from scripts/default-lang.ts, dont modify, run npm run generate:lang
+const langTsContent = `// This file is generated from scripts/default-lang.ts, don\'t modify, run npm run generate:lang
 ${keys.reduce((acc, key, index) => {
-    const endLine = index + 1 === Object.keys(defaultMessages).length ? '' : '\n';
+    const endLine = index + 1 === keys.length ? '' : '\n';
     acc += `    ${key.toUpperCase().replace(',', '').replace(/\./g, '_')}: '${key}',${endLine}`;
     return acc;
 }, 'export const Lang = {\n')}
 };\n`;
 writeFileSync(defaultLangTsFile, langTsContent);
 
+// tslint:disable-next-line
+console.log('\x1b[32m', `Create or replace TypeScript file: "${defaultLangTsFile}"`);
+
 // merge default messages with other languages files
 sync(`${dir}/*.json`)
     .filter((f) => f !== defaultLangFile)
     .forEach((file) => {
         writeMessages(file, {...defaultMessages, ...readMessages(file)});
+        // tslint:disable-next-line
+        console.log('\x1b[32m', `Merge file: ${file} with ${defaultLangFile}`);
     });
 
 // tslint:disable-next-line
-console.log(`> Wrote default messages to: "${resolve(defaultLangFile)}"`);
+console.log('\x1b[0m');

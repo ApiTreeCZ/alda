@@ -1,4 +1,4 @@
-// This file is generated from scripts/default-lang.ts, dont modify, run npm run generate:lang
+// This file is generated from scripts/default-lang.ts, don't modify, run npm run generate:lang
 export const Lang = {
     TITLE: 'title',
     ABOUT_DESCRIPTION: 'about.description',
