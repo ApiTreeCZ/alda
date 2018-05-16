@@ -15,7 +15,7 @@ const decorate = withStyles((_) => ({
 
 const items = [
     {name: 'Home page', route: '/', icon: 'home', divider: false},
-    {name: 'Bank API', route: '/bankApi', icon: 'info', divider: true},
+    {name: 'Profile', route: '/profile', icon: 'info', divider: true},
     {name: 'Info', route: '/info', icon: 'info', divider: false},
 ];
 

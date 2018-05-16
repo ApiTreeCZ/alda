@@ -24,7 +24,7 @@ let client = null;
 const createClient = (dispatch: Dispatch) => {
     if (!client) {
         client = new ApolloClient({
-            uri: '/api/graphql',
+            uri: '/graphql',
             fetchOptions: {credentials: 'same-origin', fetch},
             onError: onError(dispatch),
         });

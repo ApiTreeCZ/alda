@@ -1,0 +1,19 @@
+type Query {
+    me: Account
+}
+
+type Mutation {
+    updateMe(input: MeUpdateInput): Account
+}
+
+type Account {
+    id: ID!
+    firstName: String!
+    lastName: String!
+}
+
+input MeUpdateInput {
+    id: ID!
+    firstName: String
+    lastName: String
+}
