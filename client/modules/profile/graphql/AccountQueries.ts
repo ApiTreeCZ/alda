@@ -1,6 +1,4 @@
 import gql from 'graphql-tag';
-import {Query as GraphQLQuery} from '@graphql-model';
-import {Query} from 'react-apollo';
 
 export const AccountQueries = {
     gql: {
@@ -13,9 +11,5 @@ export const AccountQueries = {
                 }
             }
         `,
-    },
-
-    component: {
-        me: class MeQuery extends Query<GraphQLQuery> {},
     },
 };

@@ -21,18 +21,25 @@ Run commands (source directory):
 
 ```npm install```
 
-and
+for development:
 
 ```npm run dev```
 
+
+for production (better as Docker container, go to file Dockerfile):
+
+```npm run build && npm run start```
+
 go to: [http://localhost:8080](http://localhost:8080)
+
+graphiql: [http://localhost:8080/graphiql](http://localhost:8080/graphiql) 
 
 ## Libraries
 * **Typescript** 2.8.x
 * **React** 16.3.x
 * **Next.js** 6.0.x
 * **GraphQL** 0.13.x
-* **Apollo** 2.1.x
+* **React Apollo** 2.1.x
 * **Material-UI** rc.0
 * **Redux** 4.x
 * **Redux-form** 7.3.x

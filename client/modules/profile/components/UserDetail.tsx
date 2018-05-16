@@ -3,8 +3,10 @@ import {Fragment} from 'react';
 import {Button, Grid, LinearProgress, Typography, withStyles} from '@material-ui/core';
 import {Refresh as RefreshIcon} from '@material-ui/icons';
 import {AccountQueries} from '../graphql';
+import {Query} from 'react-apollo';
+import {Query as GraphQLQuery} from '@graphql-model';
 
-const MeQuery = AccountQueries.component.me;
+class MeQuery extends Query<GraphQLQuery> {}
 
 interface Props {}
 
@@ -27,7 +29,7 @@ export const UserDetail = decorate<Props>(({}) => {
                                         <Typography variant="display1">Profile</Typography>
                                     </Grid>
                                     <Grid item>
-                                        <Button onClick={handleOnClickRefresh}>
+                                        <Button onClick={handleOnClickRefresh} disabled={loading}>
                                             <RefreshIcon />&nbsp;&nbsp;Refresh
                                         </Button>
                                     </Grid>
@@ -38,14 +40,15 @@ export const UserDetail = decorate<Props>(({}) => {
                                     <LinearProgress />
                                 </Grid>
                             )}
-                            {data.me && (
-                                <Grid item xs={12}>
-                                    <Typography variant="title">Logged user</Typography>
-                                    <Typography>
-                                        {data.me.firstName} {data.me.lastName}
-                                    </Typography>
-                                </Grid>
-                            )}
+                            {data &&
+                                data.me && (
+                                    <Grid item xs={12}>
+                                        <Typography variant="title">Logged user</Typography>
+                                        <Typography>
+                                            {data.me.firstName} {data.me.lastName}
+                                        </Typography>
+                                    </Grid>
+                                )}
                         </Grid>
                     </Fragment>
                 );
