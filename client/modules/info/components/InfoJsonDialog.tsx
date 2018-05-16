@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Fragment} from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, withStyles} from '@material-ui/core';
 import {InfoModel} from '../model';
 
@@ -21,10 +20,8 @@ export const InfoJsonDialog = decorate<Props>(({open, data, onClose, transition,
         <Dialog open={open} onClose={onClose} TransitionComponent={transition}>
             <DialogTitle>{'Info in JSON'}</DialogTitle>
             <DialogContent>
-                <Fragment>
-                    <DialogContentText>Info about system. Also you can get in url: /_info</DialogContentText>
-                    {open && data && <pre className={classes.content}>{JSON.stringify(data, null, 2)}</pre>}
-                </Fragment>
+                <DialogContentText>Info about system. Also you can get in url: /_info</DialogContentText>
+                {open && data && <pre className={classes.content}>{JSON.stringify(data, null, 2)}</pre>}
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Close</Button>

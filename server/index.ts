@@ -5,6 +5,10 @@ import {basename} from 'path';
 import {readFileSync} from 'fs';
 import * as accepts from 'accepts';
 import * as IntlPolyfill from 'intl';
+// tslint:disable-next-line
+const proxy = require('express-http-proxy');
+// tslint:disable-next-line
+require('dotenv').config();
 
 Intl.NumberFormat = IntlPolyfill.NumberFormat;
 Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
@@ -36,6 +40,8 @@ const getMessages = (locale) => require(`../lang/${locale}.json`);
 
 app.prepare().then(() => {
     const server = express();
+
+    server.use('/api', proxy(process.env.BACKEND_ENDPOINT));
 
     server.get('/healthz', (_, res) => {
         // check my health

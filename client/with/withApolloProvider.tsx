@@ -1,29 +1,34 @@
 import * as React from 'react';
 import {connect, Dispatch} from 'react-redux';
-import {onError} from 'apollo-link-error';
 import {ApolloProvider} from 'react-apollo';
-import {InMemoryCache} from 'apollo-client-preset';
-import {ApolloClient} from 'apollo-client';
-import {HttpLink} from 'apollo-link-http';
+import ApolloClient from 'apollo-boost';
+import {ErrorResponse} from 'apollo-link-error';
 import * as fetch from 'isomorphic-fetch';
 
 declare const process: any;
+declare const global: any;
 
-// tslint:disable-next-line
-const createErrorLink = (_: ApolloClient<any>, _dispatch: Dispatch) =>
-    onError(() => {
-        // TODO handle GraphQL errors
-    });
+const onError = (_: Dispatch) => (errorObj: ErrorResponse) => {
+    // TODO - implement handle errors
+    // tslint:disable-next-line
+    console.log('errorObj: ', errorObj);
+};
 
-const client = new ApolloClient({
-    connectToDevTools: process.browser,
-    link: new HttpLink({uri: '/api/graphql', credentials: 'same-origin', fetch}),
-    ssrMode: !process.browser,
-    cache: new InMemoryCache(),
-});
+// Polyfill fetch() on the server (used by apollo-client)
+if (!process.browser) {
+    global.fetch = fetch;
+}
+
+let client = null;
 
 const createClient = (dispatch: Dispatch) => {
-    client.link = createErrorLink(client, dispatch).concat(client.link as any) as any;
+    if (!client) {
+        client = new ApolloClient({
+            uri: '/api/graphql',
+            fetchOptions: {credentials: 'same-origin', fetch},
+            onError: onError(dispatch),
+        });
+    }
     return client;
 };
 

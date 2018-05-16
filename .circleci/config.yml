@@ -35,7 +35,7 @@ jobs:
           command: echo "${COVERALLS_REPO_TOKEN}" > .coveralls.yml
       - run:
           name: Run test and coverage
-          command: npm run coverage
+          command: npm run coverage:report
 
   create_docker_image:
     working_directory: ~/docker-image
