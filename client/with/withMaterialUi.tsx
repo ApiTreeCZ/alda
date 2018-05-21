@@ -100,24 +100,8 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitial
         }
     }
 
-    // Solve an isolation issue with hoist-non-react-statics.
-    // TODO: remove once hoist-non-react-statics has been updated.
-    // SEE: https://github.com/mui-org/material-ui/blob/v1-beta/docs/src/modules/components/AppWrapper.js
-    // tslint:disable-next-line
-    class Wrapper extends React.Component<Props> {
-        static async getInitialProps(ctx: any) {
-            if (BaseComponent.getInitialProps) {
-                return await BaseComponent.getInitialProps(ctx);
-            }
-            return {};
-        }
-        render() {
-            return <Component {...this.props} />;
-        }
-    }
-
     return connect<ConnectedState, ConnectedDispatch, OwnProps, any>(
         ({page: {themeOptions}}: Store) => ({themeOptions}),
         (dispatch: Dispatch): ConnectedDispatch => PageActionCreator(dispatch),
-    )(Wrapper);
+    )(Component);
 };

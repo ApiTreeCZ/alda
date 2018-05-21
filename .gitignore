@@ -6,12 +6,3 @@ coverage/
 
 .env
 .coveralls.yml
-
-helm install alda apitree/alda --set \
-image.tag=xx,\
-image.repositoryUrl=xxx,\
-image.pullSecrets.server=xxx,\
-image.pullSecrets.username=xxx,\
-image.pullSecrets.password=xxx,\
-image.pullSecrets.email=xxx,\
-domain=xxx

@@ -40,7 +40,7 @@ graphiql: [http://localhost:8080/graphiql](http://localhost:8080/graphiql)
 * **Next.js** 6.0.x
 * **GraphQL** 0.13.x
 * **React Apollo** 2.1.x
-* **Material-UI** rc.0
+* **Material-UI** 1.0.x
 * **Redux** 4.x
 * **Redux-form** 7.3.x
 * **React-intl** 2.4.x

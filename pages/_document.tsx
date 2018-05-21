@@ -1,16 +1,13 @@
 import * as React from 'react';
-import Document, {Head, Main, NextScript} from 'next/document';
+import Document, {Context, Head, Main, NextScript} from 'next/document';
 import {StylesContext} from '../client/styles/StylesContext';
 import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
-// import cssnano from 'cssnano';
 
 const prefixer = postcss([autoprefixer]);
-// FIXME cannot compile with cssnano
-// const minifier = postcss([cssnano]);
 
 class MainDocument extends Document {
-    static async getInitialProps(ctx: any) {
+    static async getInitialProps(ctx: Context) {
         const pageContext = StylesContext.getPageContext({palette: {type: 'light'}});
         const page = ctx.renderPage((Component: any) => (props: any) => <Component pageContext={pageContext} {...props} />);
 
@@ -22,7 +19,7 @@ class MainDocument extends Document {
 
         const {
             req: {locale, localeDataScript},
-        } = ctx;
+        } = ctx as any;
 
         return {
             ...page,
