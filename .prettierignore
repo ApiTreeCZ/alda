@@ -17,4 +17,4 @@ types/
 Dockerfile
 graphql.*
 
-package-lock.json
+package*.json
