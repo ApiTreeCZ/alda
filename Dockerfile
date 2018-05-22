@@ -1,6 +1,6 @@
 FROM node:10
 
-MAINTAINER Ales Dostal <a.dostal@apitree.cz>
+LABEL maintainer="a.dostal@apitree.cz"
 
 # Create app directory
 RUN mkdir -p /usr/src/app
