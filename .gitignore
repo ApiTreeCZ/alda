@@ -4,6 +4,7 @@
 dist/
 node_modules/
 coverage/
+local-files/
 
 .env
 .coveralls.yml

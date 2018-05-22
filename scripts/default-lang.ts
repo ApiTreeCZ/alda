@@ -39,7 +39,10 @@ const keys = Object.keys(defaultMessages);
 const langTsContent = `// This file is generated from scripts/default-lang.ts, don\'t modify, run npm run generate:lang
 ${keys.reduce((acc, key, index) => {
     const endLine = index + 1 === keys.length ? '' : '\n';
-    acc += `    ${key.toUpperCase().replace(',', '').replace(/\./g, '_')}: '${key}',${endLine}`;
+    acc += `    ${key
+        .toUpperCase()
+        .replace(',', '')
+        .replace(/\./g, '_')}: '${key}',${endLine}`;
     return acc;
 }, 'export const Lang = {\n')}
 };\n`;

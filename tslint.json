@@ -1,26 +1,16 @@
 {
-  "extends": [
-    "tslint:recommended",
-    "tslint-react",
-    "tslint-config-prettier"
-  ],
-  "rules": {
-    "max-line-length": [
-      false,
-      160
-    ],
-    "member-ordering": [
-      true,
-      "variables-before-functions"
-    ],
-    "ordered-imports": false,
-    "interface-name": false,
-    "jsx-curly-spacing": false,
-    "object-literal-sort-keys": false,
-    "no-object-literal-type-assertion": false,
-    "no-empty-interface": false,
-    "jsx-no-multiline-js": false,
-    "jsx-boolean-value": false,
-    "member-access": false
-  }
+    "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+    "rules": {
+        "max-line-length": [false, 160],
+        "member-ordering": [true, "variables-before-functions"],
+        "ordered-imports": false,
+        "interface-name": false,
+        "jsx-curly-spacing": false,
+        "object-literal-sort-keys": false,
+        "no-object-literal-type-assertion": false,
+        "no-empty-interface": false,
+        "jsx-no-multiline-js": false,
+        "jsx-boolean-value": false,
+        "member-access": false
+    }
 }

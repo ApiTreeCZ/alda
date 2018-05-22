@@ -1,6 +1,20 @@
-**/*
+.circleci/
+.git/
+.helm/
+.idea/
+.next/
 
-!client/
-!pages/
-!server/
+dist/
+lang/
+local-files/
+static/
+types/
 
+.coveralls.yml
+.env
+.gitignore
+.prettierignore
+Dockerfile
+graphql.*
+
+package-lock.json
