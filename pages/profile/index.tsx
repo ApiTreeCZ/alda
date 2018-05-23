@@ -1,5 +1,1 @@
-import * as React from 'react';
-
-import {ProfileContainer} from '../../client/modules/profile';
-
-export default () => <ProfileContainer />;
+export {ProfileContainer as default} from '../../client/modules/profile';

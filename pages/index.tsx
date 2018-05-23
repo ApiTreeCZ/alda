@@ -1,5 +1,1 @@
-import * as React from 'react';
-
-import {HomePageContainer} from '../client/modules/homePage';
-
-export default () => <HomePageContainer />;
+export {HomePageContainer as default} from '../client/modules/homePage';

@@ -18,11 +18,9 @@ Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 // tslint:disable-next-line
-const withRedux = require('next-redux-wrapper').default;
+const {default: withRedux} = require('next-redux-wrapper');
 // tslint:disable-next-line
-const {Container} = require('next/app');
-// tslint:disable-next-line
-const App: any = require('next/app').default;
+const {Container, default: App} = require('next/app');
 
 export interface AppProps extends InjectedIntlProps {}
 

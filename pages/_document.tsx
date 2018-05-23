@@ -7,7 +7,7 @@ import {StylesContext} from '../client/styles/StylesContext';
 
 const prefixer = postcss([autoprefixer as any]);
 
-class MainDocument extends Document {
+export default class extends Document {
     static async getInitialProps(ctx: Context) {
         const pageContext = StylesContext.getPageContext({palette: {type: 'light'}});
         const page = ctx.renderPage((Component: any) => (props: any) => <Component pageContext={pageContext} {...props} />);
@@ -67,5 +67,3 @@ class MainDocument extends Document {
         );
     }
 }
-
-export default MainDocument;
