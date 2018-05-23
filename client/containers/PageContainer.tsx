@@ -3,8 +3,8 @@ import {Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
+import {AppProps} from '../../pages/_app';
 import {PageAction, PageActionCreator} from '../actions';
-import {AppProps} from '../app';
 import {Content, LeftMenu, TopBar} from '../components';
 import {Store} from '../Store';
 import {PageStore} from '../stores';
