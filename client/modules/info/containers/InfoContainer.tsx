@@ -1,13 +1,15 @@
+import {Button, Grid, Slide, Typography} from '@material-ui/core';
+import {TransitionProps} from '@material-ui/core/transitions/transition';
+import {OpenInBrowser as OpenInBrowserIcon, Refresh as RefreshIcon} from '@material-ui/icons';
 import * as React from 'react';
 import {Fragment} from 'react';
-import {Dispatch} from 'redux';
 import {connect} from 'react-redux';
-import {Button, Grid, Slide, Typography} from '@material-ui/core';
-import {OpenInBrowser as OpenInBrowserIcon, Refresh as RefreshIcon} from '@material-ui/icons';
+import {Dispatch} from 'redux';
+
 import {Store} from '../../../Store';
-import {InfoStore} from '../store';
 import {InfoAction, InfoActionCreator} from '../actions';
 import {DependenciesPaper, InfoHeaderPaper, InfoJsonDialog} from '../components';
+import {InfoStore} from '../store';
 
 interface OwnProps {}
 
@@ -19,7 +21,7 @@ interface ConnectedDispatch extends InfoAction {}
 
 type Props = ConnectedState & ConnectedDispatch & OwnProps;
 
-const transition = (props) => <Slide direction="left" {...props} />;
+const transition = (props: TransitionProps) => <Slide direction="left" {...props} />;
 
 export class Container extends React.Component<Props> {
     componentDidMount(): void {

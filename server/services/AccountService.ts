@@ -12,7 +12,10 @@ export const AccountService = {
     },
 
     save({input}: UpdateMeMutationArgs): Account {
-        fakeAccount = {...fakeAccount, firstName: input.firstName || input.firstName, lastName: input.lastName || input.lastName};
+        if (!input) {
+            return fakeAccount;
+        }
+        fakeAccount = {...fakeAccount, firstName: input.firstName || fakeAccount.firstName, lastName: input.lastName || fakeAccount.lastName};
         return fakeAccount;
     },
 };

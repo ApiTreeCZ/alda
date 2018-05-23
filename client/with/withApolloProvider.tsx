@@ -1,9 +1,10 @@
-import * as React from 'react';
-import {connect, Dispatch} from 'react-redux';
-import {ApolloProvider} from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import {ErrorResponse} from 'apollo-link-error';
 import * as fetch from 'isomorphic-fetch';
+import {Context} from 'next/document';
+import * as React from 'react';
+import {ApolloProvider} from 'react-apollo';
+import {connect, Dispatch} from 'react-redux';
 
 declare const process: any;
 declare const global: any;
@@ -19,7 +20,7 @@ if (!process.browser) {
     global.fetch = fetch;
 }
 
-let client = null;
+let client: ApolloClient<any>;
 
 const createClient = (dispatch: Dispatch) => {
     if (!client) {
@@ -32,7 +33,7 @@ const createClient = (dispatch: Dispatch) => {
     return client;
 };
 
-export const withApolloProvider = (Page: React.ComponentClass & {getInitialProps?: (ctx) => any}): React.ComponentClass<any> => {
+export const withApolloProvider = (Page: React.ComponentClass & {getInitialProps?: (ctx: Context) => any}): React.ComponentClass<any> => {
     interface ConnectedDispatch {
         readonly dispatch: Dispatch;
     }

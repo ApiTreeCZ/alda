@@ -1,12 +1,12 @@
-import * as React from 'react';
-import {compose} from 'react-apollo';
 import * as withRedux from 'next-redux-wrapper';
 import Router from 'next/router';
 import * as NProgress from 'nprogress';
-import {withApolloProvider, withIntl, withMaterialUi} from './with';
-import {createStore} from './createStore';
-import {PageContainer} from './containers';
+import * as React from 'react';
+import {compose} from 'react-apollo';
 import {InjectedIntlProps} from 'react-intl';
+import {PageContainer} from './containers';
+import {createStore} from './createStore';
+import {withApolloProvider, withIntl, withMaterialUi} from './with';
 
 NProgress.configure({parent: '#loadingContent'});
 
@@ -24,7 +24,7 @@ export interface AppProps extends InjectedIntlProps {}
  */
 export const app = (Component: React.ComponentType) =>
     withRedux(createStore)(
-        compose(withApolloProvider, withIntl, withMaterialUi)((props) => (
+        compose(withApolloProvider, withIntl, withMaterialUi)((props: any) => (
             <PageContainer {...props}>
                 <Component />
             </PageContainer>

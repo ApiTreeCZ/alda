@@ -3,6 +3,7 @@
 .helm/
 .idea/
 .next/
+.vscode/
 
 dist/
 lang/

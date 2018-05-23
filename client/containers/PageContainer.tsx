@@ -2,11 +2,12 @@ import * as React from 'react';
 import {Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
+
+import {PageAction, PageActionCreator} from '../actions';
+import {AppProps} from '../app';
 import {Content, LeftMenu, TopBar} from '../components';
 import {Store} from '../Store';
-import {PageAction, PageActionCreator} from '../actions';
 import {PageStore} from '../stores';
-import {AppProps} from '../app';
 
 interface OwnProps extends AppProps {}
 
@@ -24,7 +25,10 @@ export class Container extends React.Component<Props> {
             page: {themeOptions},
             changeThemeOptions,
         } = this.props;
-        changeThemeOptions({...themeOptions, palette: {...themeOptions.palette, type: themeOptions.palette.type === 'dark' ? 'light' : 'dark'}});
+        changeThemeOptions({
+            ...themeOptions,
+            palette: {...themeOptions.palette, type: themeOptions.palette && themeOptions.palette.type === 'dark' ? 'light' : 'dark'},
+        });
     };
 
     handleOnOpenLeftMenu = () => {
@@ -41,6 +45,10 @@ export class Container extends React.Component<Props> {
             page,
             intl: {locale},
         } = this.props;
+
+        if (!page.themeOptions.palette || !page.themeOptions.palette.type) {
+            return null;
+        }
         return (
             <Fragment>
                 <TopBar

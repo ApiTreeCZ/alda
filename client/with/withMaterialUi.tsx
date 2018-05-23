@@ -1,12 +1,14 @@
+import {CssBaseline, MuiThemeProvider} from '@material-ui/core';
+import {ThemeOptions} from '@material-ui/core/styles/createMuiTheme';
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {CssBaseline, MuiThemeProvider} from '@material-ui/core';
-import {PageContext, StylesContext} from '../styles/StylesContext';
-import {AppFrame} from '../components';
-import {ThemeOptions} from '@material-ui/core/styles/createMuiTheme';
-import {PageAction, PageActionCreator} from '../actions';
-import {Store} from '../Store';
 import {Dispatch} from 'redux';
+
+import {PageAction, PageActionCreator} from '../actions';
+import {AppFrame} from '../components';
+import {Store} from '../Store';
+import {PageContext, StylesContext} from '../styles/StylesContext';
+
 // tslint:disable-next-line
 const JssProvider = require('react-jss/lib/JssProvider').default;
 
@@ -67,8 +69,10 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitial
             }
             const {prevProps} = prevState;
             if (
-                nextProps.themeOptions.palette.type !== prevProps.themeOptions.palette.type ||
-                nextProps.themeOptions.direction !== prevProps.themeOptions.direction
+                !nextProps.themeOptions.palette ||
+                !prevProps ||
+                !prevProps.themeOptions.palette ||
+                nextProps.themeOptions.palette.type !== prevProps.themeOptions.palette.type
             ) {
                 return {prevProps: nextProps, pageContext: StylesContext.updatePageContext(nextProps.themeOptions)};
             }
@@ -84,6 +88,9 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitial
         }
 
         render() {
+            if (!this.state.pageContext) {
+                return null;
+            }
             const {
                 pageContext: {jss, sheetsRegistry, generateClassName, sheetsManager, theme},
             } = this.state;

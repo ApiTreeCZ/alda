@@ -8,3 +8,6 @@ local-files/
 
 .env
 .coveralls.yml
+
+/graphql.schema.graphql
+/graphql.schema.json

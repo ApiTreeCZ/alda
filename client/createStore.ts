@@ -1,4 +1,4 @@
-import {applyMiddleware, compose, createStore as reduxCreateStore, StoreCreator} from 'redux';
+import {StoreCreator, applyMiddleware, compose, createStore as reduxCreateStore} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import {Store} from './Store';
 import {rootReducer} from './rootReducer';
@@ -10,7 +10,7 @@ const isReduxDevTools = (isServer: boolean) => !isServer && window.__REDUX_DEVTO
 
 const reduxTools = (store: StoreCreator, isServer: boolean) => (isReduxDevTools(isServer) ? window.__REDUX_DEVTOOLS_EXTENSION__()(store) : store);
 
-const getInitialState = (state: Store, isServer: boolean) => {
+const getInitialState = (state: Store, isServer: boolean): any => {
     try {
         return isServer ? state : {...state, page: {...state.page, themeOptions: {...state.page.themeOptions, ...getThemeOptions()}}};
     } catch (err) {

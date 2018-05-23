@@ -1,5 +1,6 @@
-import * as React from 'react';
 import {Grid, List, ListItem, ListItemText, Paper, Typography, withStyles} from '@material-ui/core';
+import * as React from 'react';
+
 import {InfoModel} from '../model';
 
 interface Props {

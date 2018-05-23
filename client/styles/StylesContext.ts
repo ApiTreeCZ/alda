@@ -38,7 +38,12 @@ export const StylesContext = {
         }
 
         // Reuse context on the client-side
-        if (!global.__INIT_MATERIAL_UI__ || global.__INIT_MATERIAL_UI__.theme.palette.type !== themeOptions.palette.type) {
+        if (
+            !global.__INIT_MATERIAL_UI__ ||
+            !themeOptions.palette ||
+            !themeOptions.palette.type ||
+            global.__INIT_MATERIAL_UI__.theme.palette.type !== themeOptions.palette.type
+        ) {
             global.__INIT_MATERIAL_UI__ = createPageContext(themeOptions);
         }
         return global.__INIT_MATERIAL_UI__;

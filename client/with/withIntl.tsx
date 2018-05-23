@@ -1,5 +1,6 @@
+import {Context, DocumentProps} from 'next/document';
 import * as React from 'react';
-import {addLocaleData, injectIntl, IntlProvider} from 'react-intl';
+import {IntlProvider, addLocaleData, injectIntl} from 'react-intl';
 
 declare const window: any;
 
@@ -12,17 +13,17 @@ if (typeof window !== 'undefined' && window.ReactIntlLocaleData) {
     });
 }
 
-export const withIntl = (Page) => {
+export const withIntl = (Page: React.ComponentType<any> & {getInitialProps(ctx: Context): DocumentProps}) => {
     const IntlPage = injectIntl(Page);
 
     return class PageWithIntl extends React.Component<any> {
-        static async getInitialProps(context) {
+        static async getInitialProps(context: Context) {
             const props = typeof Page.getInitialProps === 'function' ? await Page.getInitialProps(context) : {};
 
             // Get the `locale` and `messages` from the request object on the server.
             // In the browser, use the same values that the server serialized.
             const {req} = context;
-            const {locale, messages} = req || window.__NEXT_DATA__.props.pageProps.initialProps;
+            const {locale, messages} = (req as any) || window.__NEXT_DATA__.props.pageProps.initialProps;
 
             // Always update the current time on page load/transition because the
             // <IntlProvider> will be a new instance even with pushState routing.

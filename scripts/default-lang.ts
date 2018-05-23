@@ -17,7 +17,7 @@ const writeMessages = (file: string, content: any) => writeFileSync(file, JSON.s
 const defaultMessages = sync(`${dir}/.messages/**/*.json`)
     .map((filename) => readMessages(filename))
     .reduce((messages, descriptors) => {
-        descriptors.forEach(({id, defaultMessage}) => {
+        descriptors.forEach(({id, defaultMessage}: any) => {
             if (messages.hasOwnProperty(id)) {
                 throw new Error(`Duplicate message id: ${id}`);
             }

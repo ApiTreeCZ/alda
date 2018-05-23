@@ -1,10 +1,11 @@
-import * as React from 'react';
-import Document, {Context, Head, Main, NextScript} from 'next/document';
-import {StylesContext} from '../client/styles/StylesContext';
-import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
+import Document, {Context, Head, Main, NextScript} from 'next/document';
+import postcss from 'postcss';
+import * as React from 'react';
 
-const prefixer = postcss([autoprefixer]);
+import {StylesContext} from '../client/styles/StylesContext';
+
+const prefixer = postcss([autoprefixer as any]);
 
 class MainDocument extends Document {
     static async getInitialProps(ctx: Context) {

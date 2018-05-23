@@ -1,13 +1,15 @@
-import * as express from 'express';
-import * as nextjs from 'next';
-import {sync} from 'glob';
-import {basename} from 'path';
-import {readFileSync} from 'fs';
 import * as accepts from 'accepts';
-import * as IntlPolyfill from 'intl';
-import {graphqlExpress, graphiqlExpress} from 'apollo-server-express';
-import {schema} from './graphql';
+import {graphiqlExpress, graphqlExpress} from 'apollo-server-express';
 import * as bodyParser from 'body-parser';
+import * as express from 'express';
+import {readFileSync} from 'fs';
+import {sync} from 'glob';
+import * as IntlPolyfill from 'intl';
+import * as nextjs from 'next';
+import {basename} from 'path';
+
+import {schema} from './graphql';
+
 // tslint:disable-next-line
 require('dotenv').config();
 
@@ -24,7 +26,7 @@ const languages = sync('./lang/*.json').map((f) => basename(f, '.json'));
 // We need to expose React Intl's locale data on the request for the user's
 // locale. This function will also cache the scripts by lang in memory.
 const localeDataCache = new Map();
-const getLocaleDataScript = (locale) => {
+const getLocaleDataScript = (locale: string) => {
     const lang = locale.split('-')[0];
     if (!localeDataCache.has(lang)) {
         const localeDataFile = require.resolve(`react-intl/locale-data/${lang}`);
@@ -37,7 +39,7 @@ const getLocaleDataScript = (locale) => {
 // We need to load and expose the translations on the request for the user's
 // locale. These will only be used in production, in dev the `defaultMessage` in
 // each message description in the source code will be used.
-const getMessages = (locale) => require(`../lang/${locale}.json`);
+const getMessages = (locale: string) => require(`../lang/${locale}.json`);
 
 app.prepare().then(() => {
     const server = express();
@@ -77,8 +79,10 @@ app.prepare().then(() => {
         // When you change language other way (with browser settings is now), you must rewrite get locale from client on this code row
         const locale = accepts(req).language(languages);
         req.locale = locale;
-        req.localeDataScript = getLocaleDataScript(locale);
-        req.messages = getMessages(locale);
+        if (locale) {
+            req.localeDataScript = getLocaleDataScript(locale);
+            req.messages = getMessages(locale);
+        }
         return handle(req, res);
     });
 

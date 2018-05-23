@@ -1,12 +1,14 @@
-import * as React from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, withStyles} from '@material-ui/core';
+import {TransitionProps} from '@material-ui/core/transitions/transition';
+import * as React from 'react';
+
 import {InfoModel} from '../model';
 
 interface Props {
     readonly open: boolean;
-    readonly data: InfoModel;
+    readonly data?: InfoModel;
     readonly onClose: () => void;
-    readonly transition?: (props) => JSX.Element;
+    readonly transition?: (props: TransitionProps) => JSX.Element;
 }
 
 const decorate = withStyles((theme) => ({
