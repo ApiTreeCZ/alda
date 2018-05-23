@@ -1,10 +1,11 @@
-import * as React from 'react';
-import {Fragment} from 'react';
+import {Query as GraphQLQuery} from '@graphql-model';
 import {Button, Grid, LinearProgress, Typography, withStyles} from '@material-ui/core';
 import {Refresh as RefreshIcon} from '@material-ui/icons';
-import {AccountQueries} from '../graphql';
+import * as React from 'react';
+import {Fragment} from 'react';
 import {Query} from 'react-apollo';
-import {Query as GraphQLQuery} from '@graphql-model';
+
+import {AccountQueries} from '../graphql';
 
 class MeQuery extends Query<GraphQLQuery> {}
 

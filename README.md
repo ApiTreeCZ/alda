@@ -54,3 +54,7 @@ graphiql: [http://localhost:8080/graphiql](http://localhost:8080/graphiql)
 *   **Prettier**
 *   **TSLint**
 *   **Coveralls**
+
+## Improvements
+
+All commands have been tested for Mac OS. When you have problems on Windows please send me feedback. Thanks.
