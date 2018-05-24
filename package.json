@@ -21,6 +21,7 @@
         "build": "npm run generate:graphql:json && npm run generate:graphql:typescript && next build && tsc --project tsconfig.server.json && npm run generate:lang",
         "start": "NODE_ENV=production node dist/index.js",
         "dev": "npm run generate:graphql:json && npm run generate:graphql:typescript && npm run generate:lang && nodemon server/index.ts",
+        "debug": "node --inspect dist/index.js",
         "tslint": "tslint -c tslint.json 'client/**/*.*' 'pages/**/*.*' 'server/**/*.*'",
         "tslint:check": "tslint-config-prettier-check ./tslint.json",
         "prettier:show": "prettier --list-different \"./**/*\"",
