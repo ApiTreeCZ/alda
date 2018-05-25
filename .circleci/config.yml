@@ -59,10 +59,10 @@ jobs:
           command: cd .. && cd .. && ls -a
       - run:
           name: show 3
-          command: cat Makefile
+          command: cat /usr/src/app/Makefile
       - run:
           name: Package and deploy
-          command: make helm-all
+          command: make -C /usr/src/app helm-all
 
   create_docker_image:
     working_directory: ~/docker-image
