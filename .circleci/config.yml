@@ -59,7 +59,7 @@ jobs:
           command: cat /usr/src/app/Makefile
       - run:
           name: Package and deploy
-          command: make -f /usr/src/app helm-all
+          command: make helm-all -C /usr/src/app
 
   create_docker_image:
     working_directory: ~/docker-image
