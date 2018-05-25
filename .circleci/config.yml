@@ -40,17 +40,16 @@ jobs:
   test_deploy_helm_chart:
     docker:
       - image: apitreecz/k8s-helm-jfrog:latest
-    environment:
-        DIRECTORY_CHART: .helm/${CIRCLE_PROJECT_REPONAME}
-        VERSION: 0.1.0-test.1
-        REPO_URL: ${JFROG_HELM_REPO_LOCAL}
-        REPO_USER: ${JFROG_USER}
-        REPO_PASS: ${JFROG_PASS}
     steps:
       - checkout
       - run:
           name: Package and deploy
-          command: khj helm-all
+          command: |
+            DIRECTORY_CHART=.helm/${CIRCLE_PROJECT_REPONAME} 
+            VERSION=0.1.0-test.1 
+            REPO_URL=${JFROG_HELM_REPO_LOCAL} REPO_USER=${JFROG_USER}
+            REPO_PASS=${JFROG_PASS}
+            khj helm-all
 
   create_docker_image:
     working_directory: ~/docker-image
