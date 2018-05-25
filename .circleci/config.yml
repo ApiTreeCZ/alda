@@ -45,10 +45,10 @@ jobs:
       - run:
           name: Package and deploy
           command: |
-            DIRECTORY_CHART=.helm/${CIRCLE_PROJECT_REPONAME} 
-            VERSION=0.1.0-test.1 
-            REPO_URL=${JFROG_HELM_REPO_LOCAL} REPO_USER=${JFROG_USER}
-            REPO_PASS=${JFROG_PASS}
+            DIRECTORY_CHART=.helm/${CIRCLE_PROJECT_REPONAME} \
+            VERSION=0.1.0-test.1 \
+            REPO_URL=${JFROG_HELM_REPO_LOCAL} REPO_USER=${JFROG_USER} \
+            REPO_PASS=${JFROG_PASS} \
             khj helm-all
 
   create_docker_image:
