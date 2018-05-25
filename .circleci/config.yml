@@ -37,20 +37,6 @@ jobs:
           name: Run test and coverage
           command: npm run coverage
 
-  test_deploy_helm_chart:
-    docker:
-      - image: apitreecz/k8s-helm-jfrog:latest
-    steps:
-      - checkout
-      - run:
-          name: Package and deploy
-          command: |
-            DIRECTORY_CHART=.helm/${CIRCLE_PROJECT_REPONAME} \
-            VERSION=${CIRCLE_TAG:1} \
-            REPO_URL=${JFROG_HELM_REPO_LOCAL} REPO_USER=${JFROG_USER} \
-            REPO_PASS=${JFROG_PASS} \
-            khj helm-all
-
   create_docker_image:
     working_directory: ~/docker-image
     machine: true
@@ -74,34 +60,17 @@ jobs:
 
   deploy_helm_chart:
     docker:
-      - image: lachlanevenson/k8s-helm:latest
-    working_directory: ~/helm
+      - image: apitreecz/k8s-helm-jfrog:latest
     steps:
       - checkout
       - run:
-          name: Init Helm
-          command: helm init --client-only
-      - run:
-          name: Set Helm Chart version
-          command: sed -i -e "s/\${HELM_VERSION}/${CIRCLE_TAG:1}/g" .helm/${CIRCLE_PROJECT_REPONAME}/Chart.yaml
-      - run:
-          name: Show Chart.yaml
-          command: cat .helm/${CIRCLE_PROJECT_REPONAME}/Chart.yaml
-      - run:
-          name: Package Helm Chart
+          name: Package and deploy
           command: |
-            mkdir .helm/dist
-            helm package .helm/${CIRCLE_PROJECT_REPONAME}/ -d .helm/dist/
-      - run:
-          name: Install curl
-          command: |
-            apk update
-            apk add curl curl-dev bash
-      - run:
-          name: Deploy Helm Chart
-          command: |
-            TGZ_FILENAME=${CIRCLE_PROJECT_REPONAME}-${CIRCLE_TAG:1}.tgz
-            curl -u ${JFROG_USER}:${JFROG_PASS} -T .helm/dist/${TGZ_FILENAME} "${JFROG_HELM_REPO_LOCAL}/${TGZ_FILENAME}"
+            DIRECTORY_CHART=.helm/${CIRCLE_PROJECT_REPONAME} \
+            VERSION=${CIRCLE_TAG:1} \
+            REPO_URL=${JFROG_HELM_REPO_LOCAL} REPO_USER=${JFROG_USER} \
+            REPO_PASS=${JFROG_PASS} \
+            khj helm-all
 
   deploy_google_cloud_kubernetes:
     docker:
@@ -157,14 +126,6 @@ workflows:
   build:
     jobs:
       - build:
-          context: apitree-aldo-context
-          filters:
-            tags:
-              only: /v[0-9]+(\.[0-9]+)*(-.+)?/
-            branches:
-              only:
-                - dev1
-      - test_deploy_helm_chart:
           context: apitree-aldo-context
           filters:
             tags:
