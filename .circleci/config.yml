@@ -47,12 +47,11 @@ jobs:
           name: Package and deploy
           command: make helm-all
           environment:
-            DIRECTORY_CHART=.helm/${CIRCLE_PROJECT_REPONAME}
-            VERSION=0.1.0-test.1
-            REPO_URL=${JFROG_HELM_REPO_LOCAL}
-            REPO_USER=${JFROG_USER}
-            REPO_PASS=${JFROG_PASS}
-
+            - DIRECTORY_CHART=.helm/${CIRCLE_PROJECT_REPONAME}
+            - VERSION=0.1.0-test.1
+            - REPO_URL=${JFROG_HELM_REPO_LOCAL}
+            - REPO_USER=${JFROG_USER}
+            - REPO_PASS=${JFROG_PASS}
 
   create_docker_image:
     working_directory: ~/docker-image
