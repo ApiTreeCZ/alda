@@ -52,7 +52,13 @@ jobs:
           name: show
           command: ls -a
       - run:
+          name: show 1
+          command: cd .. && ls -a
+      - run:
           name: show 2
+          command: cd .. && cd .. && ls -a
+      - run:
+          name: show 3
           command: cat Makefile
       - run:
           name: Package and deploy
