@@ -46,9 +46,14 @@ jobs:
         REPO_URL: ${JFROG_HELM_REPO_LOCAL}
         REPO_USER: ${JFROG_USER}
         REPO_PASS: ${JFROG_PASS}
-    working_directory: ~/helm
     steps:
       - checkout
+      - run:
+          name: show
+          command: ls -a
+      - run:
+          name: show 2
+          command: cat Makefile
       - run:
           name: Package and deploy
           command: make helm-all
