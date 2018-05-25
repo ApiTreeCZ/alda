@@ -53,16 +53,13 @@ jobs:
           command: ls -a
       - run:
           name: show 1
-          command: cd .. && ls -a
-      - run:
-          name: show 2
-          command: cd .. && cd .. && ls -a
+          command: cd /usr/src/app/ && ls -a
       - run:
           name: show 3
           command: cat /usr/src/app/Makefile
       - run:
           name: Package and deploy
-          command: make -C /usr/src/app helm-all
+          command: make -f /usr/src/app helm-all
 
   create_docker_image:
     working_directory: ~/docker-image
