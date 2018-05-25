@@ -49,17 +49,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: show
-          command: ls -a
-      - run:
-          name: show 1
-          command: cd /usr/src/app/ && ls -a
-      - run:
-          name: show 3
-          command: cat /usr/src/app/Makefile
-      - run:
           name: Package and deploy
-          command: make helm-all -C /usr/src/app
+          command: khj helm-all
 
   create_docker_image:
     working_directory: ~/docker-image
