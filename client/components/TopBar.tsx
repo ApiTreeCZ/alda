@@ -1,16 +1,16 @@
-import * as React from 'react';
-import {AppBar, IconButton, PaletteType, Toolbar, Typography, withStyles} from '@material-ui/core';
+import {AppBar, IconButton, Toolbar, Typography, withStyles} from '@material-ui/core';
 import {LightbulbOutline, Menu as MenuIcon} from '@material-ui/icons';
-import {FormattedMessage} from 'react-intl';
-import {LightbublFullIcon} from './LightbublFullIcon';
 import Link from 'next/link';
+import * as React from 'react';
+import {FormattedMessage} from 'react-intl';
+
+import {ThemeContext} from '../contexts';
 import {Lang} from '../Lang';
+import {LightbublFullIcon} from './LightbublFullIcon';
 
 interface Props {
     readonly locale: string;
     readonly gitHubUrl: string;
-    readonly paletteType: PaletteType;
-    readonly onChangeTheme: () => void;
     readonly onClickOpenLeftMenu: () => void;
 }
 
@@ -34,7 +34,7 @@ const decorate = withStyles((theme) => ({
     },
 }));
 
-export const TopBar = decorate<Props>(({gitHubUrl, classes, locale, paletteType, onChangeTheme, onClickOpenLeftMenu}) => (
+export const TopBar = decorate<Props>(({gitHubUrl, classes, locale, onClickOpenLeftMenu}) => (
     <AppBar position="static">
         <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={onClickOpenLeftMenu}>
@@ -51,9 +51,13 @@ export const TopBar = decorate<Props>(({gitHubUrl, classes, locale, paletteType,
             </FormattedMessage>
             <div className={classes.flex} />
             <Typography color="inherit">{locale && locale.toUpperCase()}</Typography>
-            <IconButton color="inherit" onClick={onChangeTheme}>
-                {paletteType === 'light' ? <LightbulbOutline /> : <LightbublFullIcon />}
-            </IconButton>
+            <ThemeContext.Consumer>
+                {({themeOptions, toggleTheme}) => (
+                    <IconButton color="inherit" onClick={toggleTheme}>
+                        {themeOptions.palette && themeOptions.palette.type === 'light' ? <LightbulbOutline /> : <LightbublFullIcon />}
+                    </IconButton>
+                )}
+            </ThemeContext.Consumer>
             <a href={gitHubUrl} target="_blank" className={classes.externalLink}>
                 <IconButton>
                     <i className={`fab fa-github ${classes.iconColor}`} />

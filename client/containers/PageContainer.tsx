@@ -7,12 +7,11 @@ import {AppProps} from '../../pages/_app';
 import {PageAction, PageActionCreator} from '../actions';
 import {Content, LeftMenu, TopBar} from '../components';
 import {Store} from '../Store';
-import {PageStore} from '../stores';
 
 interface OwnProps extends AppProps {}
 
 interface ConnectedState {
-    readonly page: PageStore;
+    readonly isOpenLeftMenu: boolean;
 }
 
 interface ConnectedDispatch extends PageAction {}
@@ -20,17 +19,6 @@ interface ConnectedDispatch extends PageAction {}
 type Props = ConnectedState & ConnectedDispatch & OwnProps;
 
 export class Container extends React.Component<Props> {
-    handleOnChangeTheme = () => {
-        const {
-            page: {themeOptions},
-            changeThemeOptions,
-        } = this.props;
-        changeThemeOptions({
-            ...themeOptions,
-            palette: {...themeOptions.palette, type: themeOptions.palette && themeOptions.palette.type === 'dark' ? 'light' : 'dark'},
-        });
-    };
-
     handleOnOpenLeftMenu = () => {
         this.props.openLeftMenu();
     };
@@ -41,25 +29,16 @@ export class Container extends React.Component<Props> {
 
     render() {
         const {
+            isOpenLeftMenu,
             children,
-            page,
             intl: {locale},
         } = this.props;
 
-        if (!page.themeOptions.palette || !page.themeOptions.palette.type) {
-            return null;
-        }
         return (
             <Fragment>
-                <TopBar
-                    locale={locale}
-                    gitHubUrl={'https://github.com/ApiTreeCZ/alda'}
-                    onChangeTheme={this.handleOnChangeTheme}
-                    paletteType={page.themeOptions.palette.type}
-                    onClickOpenLeftMenu={this.handleOnOpenLeftMenu}
-                />
+                <TopBar locale={locale} gitHubUrl={'https://github.com/ApiTreeCZ/alda'} onClickOpenLeftMenu={this.handleOnOpenLeftMenu} />
                 <div id={'loadingContent'} />
-                <LeftMenu open={page.isOpenLeftMenu} onClose={this.handleOnCloseLeftMenu} />
+                <LeftMenu open={isOpenLeftMenu} onClose={this.handleOnCloseLeftMenu} />
                 <Content>{children}</Content>
             </Fragment>
         );
@@ -67,6 +46,6 @@ export class Container extends React.Component<Props> {
 }
 
 export const PageContainer = connect<ConnectedState, ConnectedDispatch, OwnProps, any>(
-    ({page}: Store) => ({page}),
+    ({page: {isOpenLeftMenu}}: Store) => ({isOpenLeftMenu}),
     (dispatch: Dispatch): ConnectedDispatch => PageActionCreator(dispatch),
 )(Container);
