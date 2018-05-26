@@ -4,7 +4,7 @@ import * as fetch from 'isomorphic-fetch';
 import {Context} from 'next/document';
 import * as React from 'react';
 import {ApolloProvider} from 'react-apollo';
-import {connect, Dispatch} from 'react-redux';
+import {Dispatch} from 'react-redux';
 
 declare const process: any;
 declare const global: any;
@@ -34,11 +34,7 @@ const createClient = (dispatch: Dispatch) => {
 };
 
 export const withApolloProvider = (Page: React.ComponentClass & {getInitialProps?: (ctx: Context) => any}): React.ComponentClass<any> => {
-    interface ConnectedDispatch {
-        readonly dispatch: Dispatch;
-    }
-
-    class PageWithApollo extends React.Component<any> {
+    return class PageWithApollo extends React.Component<any> {
         static async getInitialProps(ctx: any) {
             if (Page.getInitialProps) {
                 return Page.getInitialProps(ctx);
@@ -47,14 +43,11 @@ export const withApolloProvider = (Page: React.ComponentClass & {getInitialProps
         }
 
         render() {
-            const {dispatch, ...props} = this.props;
             return (
-                <ApolloProvider client={createClient(dispatch)}>
-                    <Page {...props} />
+                <ApolloProvider client={createClient(this.props.store.dispatch)}>
+                    <Page {...this.props} />
                 </ApolloProvider>
             );
         }
-    }
-
-    return connect<{}, ConnectedDispatch, {}>(() => ({}), (dispatch) => ({dispatch}))(PageWithApollo);
+    };
 };

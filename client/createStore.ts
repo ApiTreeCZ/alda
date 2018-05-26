@@ -1,8 +1,9 @@
-import {StoreCreator, applyMiddleware, compose, createStore as reduxCreateStore} from 'redux';
+import {applyMiddleware, compose, createStore as reduxCreateStore, StoreCreator} from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import {Store} from './Store';
+
 import {rootReducer} from './rootReducer';
-import {getThemeOptions, saveThemeOptions} from './with';
+import {Store} from './Store';
+import {getThemeOptions} from './with';
 
 declare const window: any;
 
@@ -18,10 +19,5 @@ const getInitialState = (state: Store, isServer: boolean): any => {
     }
 };
 
-export const createStore = (initialState: Store, {isServer}: {isServer: boolean}) => {
-    const store = compose(applyMiddleware(thunkMiddleware))(reduxTools(reduxCreateStore, isServer))(rootReducer, getInitialState(initialState, isServer));
-    store.subscribe(() => {
-        saveThemeOptions(store.getState().page.themeOptions);
-    });
-    return store;
-};
+export const createStore = (initialState: Store, {isServer}: {isServer: boolean}) =>
+    compose(applyMiddleware(thunkMiddleware))(reduxTools(reduxCreateStore, isServer))(rootReducer, getInitialState(initialState, isServer));

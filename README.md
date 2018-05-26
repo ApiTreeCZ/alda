@@ -37,7 +37,7 @@ graphiql: [http://localhost:8080/graphiql](http://localhost:8080/graphiql)
 ## Libraries
 
 *   **Typescript** 2.8.x
-*   **React** 16.3.x
+*   **React** 16.4.x
 *   **Next.js** 6.0.x
 *   **GraphQL** 0.13.x
 *   **React Apollo** 2.1.x

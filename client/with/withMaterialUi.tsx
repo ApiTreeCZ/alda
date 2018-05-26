@@ -24,7 +24,7 @@ export const getThemeOptions = (): ThemeOptions | undefined => {
     }
 };
 
-export const saveThemeOptions = (theme: ThemeOptions) => {
+const saveThemeOptions = (theme: ThemeOptions) => {
     try {
         localStorage.setItem('themeOptions', JSON.stringify(theme));
     } catch (err) {
@@ -65,6 +65,7 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitial
 
         static getDerivedStateFromProps(nextProps: Props, prevState: State) {
             if (typeof prevState.pageContext === 'undefined') {
+                saveThemeOptions(nextProps.themeOptions);
                 return {prevProps: nextProps, pageContext: nextProps.pageContext || StylesContext.getPageContext(nextProps.themeOptions)};
             }
             const {prevProps} = prevState;
@@ -74,6 +75,7 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitial
                 !prevProps.themeOptions.palette ||
                 nextProps.themeOptions.palette.type !== prevProps.themeOptions.palette.type
             ) {
+                saveThemeOptions(nextProps.themeOptions);
                 return {prevProps: nextProps, pageContext: StylesContext.updatePageContext(nextProps.themeOptions)};
             }
             return null;
