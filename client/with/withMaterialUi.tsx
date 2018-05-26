@@ -35,9 +35,9 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitial
 
         toggleTheme = () => {
             this.setState((prevState) => {
-                const newThemeOptions: ThemeOptions = {
-                    palette: {type: prevState.themeOptions.palette && prevState.themeOptions.palette.type === 'dark' ? 'light' : 'dark'},
-                };
+                const newThemeOptions: ThemeOptions = !prevState.themeOptions.palette
+                    ? themeOptions
+                    : {palette: {type: prevState.themeOptions.palette.type === 'light' ? 'dark' : 'light'}};
                 saveThemeOptions(newThemeOptions);
                 return {...prevState, themeOptions: newThemeOptions, pageContext: StylesContext.getPageContext(newThemeOptions)};
             });
