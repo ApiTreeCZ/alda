@@ -7,27 +7,26 @@ import {StylesContext} from '../client/styles/StylesContext';
 
 const prefixer = postcss([autoprefixer as any]);
 
+const generateCss = async (css: string): Promise<string> => {
+    if (process.env.NODE_ENV === 'production') {
+        return (await prefixer.process(css, {from: undefined})).css;
+    }
+    return css;
+};
+
+type ContextWithLocale = Context & {req: {locale: string; localeDataScript: string}};
+
 export default class extends Document {
-    static async getInitialProps(ctx: Context) {
+    static async getInitialProps({renderPage, req: {locale, localeDataScript}}: ContextWithLocale) {
         const pageContext = StylesContext.getPageContext({palette: {type: 'light'}});
-        const page = ctx.renderPage((Component: any) => (props: any) => <Component pageContext={pageContext} {...props} />);
-
-        let css = pageContext.sheetsRegistry.toString();
-        if (process.env.NODE_ENV === 'production') {
-            css = (await prefixer.process(css, {from: undefined})).css;
-            // css = (await minifier.process(css, {from: undefined})).css;
-        }
-
-        const {
-            req: {locale, localeDataScript},
-        } = ctx as any;
+        const page = renderPage((Component: any) => (props: any) => <Component pageContext={pageContext} {...props} />);
 
         return {
             ...page,
             pageContext,
             locale,
             localeDataScript,
-            styles: <style id="jss-server-side" dangerouslySetInnerHTML={{__html: css}} />,
+            styles: <style id="jss-server-side" dangerouslySetInnerHTML={{__html: await generateCss(pageContext.sheetsRegistry.toString())}} />,
         };
     }
 
