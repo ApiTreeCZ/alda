@@ -11,6 +11,7 @@ local-files/
 static/
 types/
 
+.babelrc
 .coveralls.yml
 .env
 .gitignore
