@@ -2,11 +2,11 @@
 
 > A boilerplate for React isomorphic aplication with Material Design, GraphQL, Redux, Redux Form and custom server
 
-*   Do you want to start with React?
-*   Do you want to start with Material Design?
-*   Do you want to start with Redux?
-*   Do you want to start with GraphQL?
-*   ...with Typescript
+-   Do you want to start with React?
+-   Do you want to start with Material Design?
+-   Do you want to start with Redux?
+-   Do you want to start with GraphQL?
+-   ...with Typescript
 
 ## Download
 
@@ -36,24 +36,24 @@ graphiql: [http://localhost:8080/graphiql](http://localhost:8080/graphiql)
 
 ## Libraries
 
-*   **Typescript** 2.8.x
-*   **React** 16.4.x
-*   **Next.js** 6.0.x
-*   **GraphQL** 0.13.x
-*   **React Apollo** 2.1.x
-*   **Material-UI** 1.0.x
-*   **Redux** 4.x
-*   **Redux-form** 7.3.x
-*   **React-intl** 2.4.x
-*   _... go to package.json_
+-   **Typescript** 2.8.x
+-   **React** 16.4.x
+-   **Next.js** 6.0.x
+-   **GraphQL** 0.13.x
+-   **React Apollo** 2.1.x
+-   **Material-UI** 1.0.x
+-   **Redux** 4.x
+-   **Redux-form** 7.3.x
+-   **React-intl** 2.4.x
+-   _... go to package.json_
 
 ## Tools
 
-*   **CircleCI**
-*   **Nodemon**
-*   **Prettier**
-*   **TSLint**
-*   **Coveralls**
+-   **CircleCI**
+-   **Nodemon**
+-   **Prettier**
+-   **TSLint**
+-   **Coveralls**
 
 ## Improvements
 
