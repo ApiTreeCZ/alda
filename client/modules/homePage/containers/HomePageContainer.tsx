@@ -1,7 +1,9 @@
-import * as React from 'react';
 import {Grid} from '@material-ui/core';
-import {AboutPaper, TechCard} from '../components';
+import * as React from 'react';
+
+import {PageContainer} from '../../../containers';
 import {Lang} from '../../../Lang';
+import {AboutPaper, TechCard} from '../components';
 
 interface Props {}
 
@@ -24,16 +26,18 @@ const technologies: Technology[] = [
 class Container extends React.Component<Props> {
     render() {
         return (
-            <Grid container spacing={8}>
-                <Grid item xs={12}>
-                    <AboutPaper />
-                </Grid>
-                {technologies.map((row) => (
-                    <Grid item xs={12} sm={6} md={3} key={row.title}>
-                        <TechCard {...row} />
+            <PageContainer>
+                <Grid container spacing={8}>
+                    <Grid item xs={12}>
+                        <AboutPaper />
                     </Grid>
-                ))}
-            </Grid>
+                    {technologies.map((row) => (
+                        <Grid item xs={12} sm={6} md={3} key={row.title}>
+                            <TechCard {...row} />
+                        </Grid>
+                    ))}
+                </Grid>
+            </PageContainer>
         );
     }
 }

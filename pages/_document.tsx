@@ -7,6 +7,9 @@ import {StylesContext} from '../client/styles/StylesContext';
 
 const prefixer = postcss([autoprefixer as any]);
 
+// tslint:disable-next-line
+const JssProvider = require('react-jss/lib/JssProvider').default;
+
 const generateCss = async (css: string): Promise<string> => {
     if (process.env.NODE_ENV === 'production') {
         return (await prefixer.process(css, {from: undefined})).css;
@@ -19,7 +22,11 @@ type ContextWithLocale = Context & {req: {locale: string; localeDataScript: stri
 export default class extends Document {
     static async getInitialProps({renderPage, req: {locale, localeDataScript}}: ContextWithLocale) {
         const pageContext = StylesContext.getPageContext({palette: {type: 'light'}});
-        const page = renderPage((Component: any) => (props: any) => <Component pageContext={pageContext} {...props} />);
+        const page = renderPage((Component: any) => (props) => (
+            <JssProvider registry={pageContext.sheetsRegistry} generateClassName={pageContext.generateClassName}>
+                <Component pageContext={pageContext} {...props} />
+            </JssProvider>
+        ));
 
         return {
             ...page,

@@ -1,14 +1,13 @@
 import * as React from 'react';
-import {Fragment} from 'react';
+import {InjectedIntlProps, injectIntl} from 'react-intl';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
-import {AppProps} from '../../pages/_app';
 import {PageAction, PageActionCreator} from '../actions';
-import {Content, LeftMenu, TopBar} from '../components';
+import {AppFrame, Content, LeftMenu, TopBar} from '../components';
 import {Store} from '../Store';
 
-interface OwnProps extends AppProps {}
+interface OwnProps {}
 
 interface ConnectedState {
     readonly isOpenLeftMenu: boolean;
@@ -16,7 +15,7 @@ interface ConnectedState {
 
 interface ConnectedDispatch extends PageAction {}
 
-type Props = ConnectedState & ConnectedDispatch & OwnProps;
+type Props = ConnectedState & ConnectedDispatch & OwnProps & InjectedIntlProps;
 
 export class Container extends React.Component<Props> {
     handleOnOpenLeftMenu = () => {
@@ -35,12 +34,12 @@ export class Container extends React.Component<Props> {
         } = this.props;
 
         return (
-            <Fragment>
+            <AppFrame>
                 <TopBar locale={locale} gitHubUrl={'https://github.com/ApiTreeCZ/alda'} onClickOpenLeftMenu={this.handleOnOpenLeftMenu} />
                 <div id={'loadingContent'} />
                 <LeftMenu open={isOpenLeftMenu} onClose={this.handleOnCloseLeftMenu} />
                 <Content>{children}</Content>
-            </Fragment>
+            </AppFrame>
         );
     }
 }
@@ -48,4 +47,4 @@ export class Container extends React.Component<Props> {
 export const PageContainer = connect<ConnectedState, ConnectedDispatch, OwnProps, any>(
     ({page: {isOpenLeftMenu}}: Store) => ({isOpenLeftMenu}),
     (dispatch: Dispatch): ConnectedDispatch => PageActionCreator(dispatch),
-)(Container);
+)(injectIntl<OwnProps>(Container as any));

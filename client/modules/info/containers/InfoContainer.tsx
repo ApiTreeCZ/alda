@@ -6,6 +6,7 @@ import {Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 
+import {PageContainer} from '../../../containers';
 import {Store} from '../../../Store';
 import {InfoAction, InfoActionCreator} from '../actions';
 import {DependenciesPaper, InfoHeaderPaper, InfoJsonDialog} from '../components';
@@ -43,7 +44,7 @@ export class Container extends React.Component<Props> {
     render() {
         const {info} = this.props;
         return (
-            <Fragment>
+            <PageContainer>
                 <Grid container spacing={8}>
                     <Grid item xs={12}>
                         <Grid container direction="row" justify="space-between">
@@ -72,7 +73,7 @@ export class Container extends React.Component<Props> {
                     )}
                 </Grid>
                 <InfoJsonDialog open={info.isOpenDialogJson} data={info.data} onClose={this.handleOnCloseDialogJson} transition={transition} />
-            </Fragment>
+            </PageContainer>
         );
     }
 }

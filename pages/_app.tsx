@@ -5,7 +5,6 @@ import {compose} from 'react-apollo';
 import {InjectedIntlProps} from 'react-intl';
 import {Provider} from 'react-redux';
 
-import {PageContainer} from '../client/containers';
 import {createStore} from '../client/createStore';
 import {withApolloProvider, withIntl, withMaterialUi} from '../client/with';
 
@@ -26,25 +25,29 @@ export interface AppProps extends InjectedIntlProps {}
 
 class AldaApp extends App {
     static async getInitialProps({Component, ctx}: any) {
-        let pageProps = {};
-        if (Component.getInitialProps) {
-            pageProps = await Component.getInitialProps(ctx);
-        }
-        return {pageProps};
+        return {
+            pageProps: {
+                ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+            },
+        };
     }
 
     render() {
-        const {Component, pageProps, store, intl} = this.props;
+        const {Component, store, pageProps} = this.props;
         return (
             <Container>
                 <Provider store={store}>
-                    <PageContainer {...pageProps} intl={intl}>
-                        <Component />
-                    </PageContainer>
+                    <Component {...pageProps} />
                 </Provider>
             </Container>
         );
     }
 }
 
-export default withRedux(createStore)(compose(withApolloProvider, withIntl, withMaterialUi)(AldaApp));
+export default withRedux(createStore)(
+    compose(
+        withApolloProvider,
+        withIntl,
+        withMaterialUi,
+    )(AldaApp),
+);
