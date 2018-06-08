@@ -26,7 +26,7 @@ const saveThemeOptions = (theme: ThemeOptions) => {
     }
 };
 
-interface ThemeContextType {
+export interface ThemeContextType {
     readonly themeOptions: ThemeOptions;
     readonly toggleTheme: () => void;
 }
@@ -40,4 +40,4 @@ const ThemeContext = React.createContext<ThemeContextType>({
     },
 });
 
-export {getThemeOptions, saveThemeOptions, themeOptions, ThemeContextType, ThemeContext};
+export {getThemeOptions, saveThemeOptions, themeOptions, ThemeContext};
