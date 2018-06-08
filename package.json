@@ -1,7 +1,7 @@
 {
     "name": "@apitree/alda",
     "description": "React stack with material-ui",
-    "version": "0.1.0-alpha.23",
+    "version": "0.1.0-alpha.24",
     "author": "ApiTree",
     "repository": {
         "type": "git",

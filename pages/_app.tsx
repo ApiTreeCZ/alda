@@ -2,7 +2,6 @@ import Router from 'next/router';
 import * as NProgress from 'nprogress';
 import * as React from 'react';
 import {compose} from 'react-apollo';
-import {InjectedIntlProps} from 'react-intl';
 import {Provider} from 'react-redux';
 
 import {createStore} from '../client/createStore';
@@ -21,8 +20,6 @@ const {default: withRedux} = require('next-redux-wrapper');
 // tslint:disable-next-line
 const {Container, default: App} = require('next/app');
 
-export interface AppProps extends InjectedIntlProps {}
-
 class AldaApp extends App {
     static async getInitialProps({Component, ctx}: any) {
         return {
@@ -37,6 +34,8 @@ class AldaApp extends App {
         return (
             <Container>
                 <Provider store={store}>
+                    {/* I can't use material-ui Layout (PageContainer) in _app.js */}
+                    {/* FIXME: https://github.com/zeit/next.js/pull/4288 */}
                     <Component {...pageProps} />
                 </Provider>
             </Container>
