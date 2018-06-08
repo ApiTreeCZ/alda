@@ -44,7 +44,7 @@ jobs:
       - checkout
       - run:
           name: Docker login
-          command: docker login -u ${JFROG_USER} -p ${JFROG_PASS} ${JFROG_DOCKER_REPO}
+          command: docker login -u ${JFROG_USER} -p ${JFROG_PASS} ${JFROG_DOCKER_REPO}/v1
       - run:
           name: Set docker image to workspace
           command: mkdir -p workspace && echo "${JFROG_DOCKER_REPO}/${CIRCLE_PROJECT_REPONAME}" > workspace/docker-image
