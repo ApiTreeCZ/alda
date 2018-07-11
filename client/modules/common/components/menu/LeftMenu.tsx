@@ -17,7 +17,6 @@ const items = [
     {name: 'Home page', route: '/', icon: 'home', divider: false},
     {name: 'Profile', route: '/profile', icon: 'info', divider: true},
     {name: 'Info', route: '/info', icon: 'info', divider: false},
-    {name: 'Domaci ukol', route: '/domaciUkol', icon: 'home', divider: false},
 ];
 
 export const LeftMenu = decorate<Props>(({open, onClose, classes}) => (

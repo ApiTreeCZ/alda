@@ -1,9 +1,8 @@
-import {CssBaseline, MuiThemeProvider} from '@material-ui/core';
-import {ThemeOptions} from '@material-ui/core/styles/createMuiTheme';
+import {CssBaseline, MuiThemeProvider, PaletteType} from '@material-ui/core';
 import * as React from 'react';
 
 import {AppFrame} from '../modules/common/components';
-import {saveThemeOptions, ThemeContext, ThemeContextType, themeOptions} from '../contexts';
+import {paletteType, savePaletteType, ThemeContext, ThemeContextType} from '../contexts';
 import {PageContext, StylesContext} from '../styles/StylesContext';
 
 // tslint:disable-next-line
@@ -20,8 +19,8 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitial
         constructor(props: Props, context: any) {
             super(props, context);
             this.state = {
-                themeOptions,
-                pageContext: StylesContext.getPageContext(themeOptions),
+                paletteType,
+                pageContext: StylesContext.getPageContext(paletteType),
                 toggleTheme: this.toggleTheme,
             };
         }
@@ -35,11 +34,9 @@ export const withMaterialUi = (BaseComponent: React.ComponentClass & {getInitial
 
         toggleTheme = () => {
             this.setState((prevState) => {
-                const newThemeOptions: ThemeOptions = !prevState.themeOptions.palette
-                    ? themeOptions
-                    : {palette: {type: prevState.themeOptions.palette.type === 'light' ? 'dark' : 'light'}};
-                saveThemeOptions(newThemeOptions);
-                return {...prevState, themeOptions: newThemeOptions, pageContext: StylesContext.getPageContext(newThemeOptions)};
+                const newPaletteType: PaletteType = !prevState.paletteType ? paletteType : prevState.paletteType === 'light' ? 'dark' : 'light';
+                savePaletteType(newPaletteType);
+                return {...prevState, paletteType: newPaletteType, pageContext: StylesContext.getPageContext(newPaletteType)};
             });
         };
 

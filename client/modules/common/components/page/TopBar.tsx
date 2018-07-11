@@ -52,9 +52,9 @@ export const TopBar = decorate<Props>(({gitHubUrl, classes, locale, onClickOpenL
             <div className={classes.flex} />
             <Typography color="inherit">{locale && locale.toUpperCase()}</Typography>
             <ThemeContext.Consumer>
-                {({themeOptions, toggleTheme}) => (
+                {({paletteType, toggleTheme}) => (
                     <IconButton color="inherit" onClick={toggleTheme}>
-                        {themeOptions.palette && themeOptions.palette.type === 'light' ? <LightbulbOutline /> : <LightbublFullIcon />}
+                        {paletteType === 'light' ? <LightbulbOutline /> : <LightbublFullIcon />}
                     </IconButton>
                 )}
             </ThemeContext.Consumer>

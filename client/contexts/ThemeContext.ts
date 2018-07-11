@@ -1,14 +1,10 @@
-import {ThemeOptions} from '@material-ui/core/styles/createMuiTheme';
 import * as React from 'react';
+import {PaletteType} from '@material-ui/core';
 
-const getThemeOptions = (): ThemeOptions => {
-    const defaultTheme: ThemeOptions = {
-        palette: {
-            type: 'dark',
-        },
-    };
+const getPaletteType = (): PaletteType => {
+    const defaultTheme: PaletteType = 'dark';
     try {
-        const find = localStorage.getItem('themeOptions');
+        const find = localStorage.getItem('paletteType');
         if (find === null) {
             return defaultTheme;
         }
@@ -18,26 +14,26 @@ const getThemeOptions = (): ThemeOptions => {
     }
 };
 
-const saveThemeOptions = (theme: ThemeOptions) => {
+const savePaletteType = (type: PaletteType) => {
     try {
-        localStorage.setItem('themeOptions', JSON.stringify(theme));
+        localStorage.setItem('paletteType', JSON.stringify(type));
     } catch (err) {
         // nothing...
     }
 };
 
 export interface ThemeContextType {
-    readonly themeOptions: ThemeOptions;
+    readonly paletteType: PaletteType;
     readonly toggleTheme: () => void;
 }
 
-const themeOptions: ThemeOptions = getThemeOptions();
+const paletteType: PaletteType = getPaletteType();
 
 const ThemeContext = React.createContext<ThemeContextType>({
-    themeOptions,
+    paletteType,
     toggleTheme: () => {
         // declaration in constructor with state change
     },
 });
 
-export {getThemeOptions, saveThemeOptions, themeOptions, ThemeContext};
+export {getPaletteType, savePaletteType, paletteType, ThemeContext};
