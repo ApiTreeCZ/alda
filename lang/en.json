@@ -5,6 +5,8 @@
   "about.questions.startWithMD": "Do you want to start with Material Design?",
   "about.questions.startWithRedux": "Do you want to start with Redux?",
   "about.withTypescript": "...with TypeScript",
+  "info.title": "This application is used for demonstration purposes",
+  "info.description": "If you are interested you can download the source code from Github. If you are interested do not hesitate to send suggestions for improvements and bug fixes.",
   "tech.react": "A JavaScript library for building user interfaces",
   "tech.md": "Make beautiful products, faster",
   "tech.redux": "Predictable state container",

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {InjectedIntlProps, injectIntl} from 'react-intl';
-import {AppFrame, Content, LeftMenu, TopBar} from './';
+import {AppFrame, Content, LeftMenu, TopBar} from '../';
 
 interface OwnProps {}
 

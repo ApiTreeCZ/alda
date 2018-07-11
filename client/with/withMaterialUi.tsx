@@ -2,7 +2,7 @@ import {CssBaseline, MuiThemeProvider} from '@material-ui/core';
 import {ThemeOptions} from '@material-ui/core/styles/createMuiTheme';
 import * as React from 'react';
 
-import {AppFrame} from '../components';
+import {AppFrame} from '../modules/common/components';
 import {saveThemeOptions, ThemeContext, ThemeContextType, themeOptions} from '../contexts';
 import {PageContext, StylesContext} from '../styles/StylesContext';
 

@@ -1,10 +1,15 @@
 [
   {"id": "title", "defaultMessage": "ALDA"},
+
   {"id": "about.description", "defaultMessage": "A boilerplate for React isomorphic aplication with Material Design, GraphQL, Redux, Redux Form and custom server"},
   {"id": "about.questions.startWithReact", "defaultMessage": "Do you want to start with React?"},
   {"id": "about.questions.startWithMD", "defaultMessage": "Do you want to start with Material Design?"},
   {"id": "about.questions.startWithRedux", "defaultMessage": "Do you want to start with Redux?"},
   {"id": "about.withTypescript", "defaultMessage": "...with TypeScript"},
+
+  {"id": "info.title", "defaultMessage": "This application is used for demonstration purposes"},
+  {"id": "info.description", "defaultMessage": "If you are interested you can download the source code from Github. If you are interested do not hesitate to send suggestions for improvements and bug fixes."},
+
   {"id": "tech.react", "defaultMessage": "A JavaScript library for building user interfaces"},
   {"id": "tech.md", "defaultMessage": "Make beautiful products, faster"},
   {"id": "tech.redux", "defaultMessage": "Predictable state container"},

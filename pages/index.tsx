@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Grid} from '@material-ui/core';
-import {Layout} from '../client/components';
-import {AboutPaper, TechCard} from '../client/modules/homePage';
+import {Layout} from '../client/modules/common/components';
+import {AboutPaper, InfoPaper, TechCard} from '../client/modules/homePage';
 import {Lang} from '../client/Lang';
 
 interface Technology {
@@ -23,8 +23,11 @@ const technologies: Technology[] = [
 export default () => (
     <Layout>
         <Grid container spacing={8}>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
                 <AboutPaper />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+                <InfoPaper />
             </Grid>
             {technologies.map((row) => (
                 <Grid item xs={12} sm={6} md={3} key={row.title}>

@@ -1,10 +1,10 @@
 import ApolloClient from 'apollo-boost';
 import {ErrorResponse} from 'apollo-link-error';
 import * as fetch from 'isomorphic-fetch';
-import {Context} from 'next/document';
+import {NextDocumentContext} from 'next/document';
 import * as React from 'react';
 import {ApolloProvider} from 'react-apollo';
-import {Dispatch} from 'react-redux';
+import {Dispatch} from 'redux';
 
 declare const process: any;
 declare const global: any;
@@ -33,7 +33,7 @@ const createClient = (dispatch: Dispatch) => {
     return client;
 };
 
-export const withApolloProvider = (Page: React.ComponentClass & {getInitialProps?: (ctx: Context) => any}): React.ComponentClass<any> => {
+export const withApolloProvider = (Page: React.ComponentClass & {getInitialProps?: (ctx: NextDocumentContext) => any}): React.ComponentClass<any> => {
     return class PageWithApollo extends React.Component<any> {
         static async getInitialProps(ctx: any) {
             if (Page.getInitialProps) {

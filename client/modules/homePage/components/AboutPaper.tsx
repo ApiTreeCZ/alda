@@ -1,4 +1,4 @@
-import {Avatar, FormHelperText, List, ListItem, ListItemText, Paper, Typography, withStyles} from '@material-ui/core';
+import {FormHelperText, List, ListItem, ListItemText, Paper, Typography, withStyles} from '@material-ui/core';
 import {Check as CheckIcon} from '@material-ui/icons';
 import * as React from 'react';
 import {FormattedMessage} from 'react-intl';
@@ -13,6 +13,8 @@ const decorate = withStyles((theme) => ({
     },
     checkItemIcon: {
         backgroundColor: theme.palette.primary.main,
+        color: theme.palette.primary.contrastText,
+        borderRadius: 2,
     },
 }));
 
@@ -26,10 +28,8 @@ export const AboutPaper = decorate<Props>(({classes}) => {
                 {questions.map((row) => (
                     <FormattedMessage id={row} key={row}>
                         {(msg) => (
-                            <ListItem>
-                                <Avatar className={classes.checkItemIcon}>
-                                    <CheckIcon />
-                                </Avatar>
+                            <ListItem dense>
+                                <CheckIcon className={classes.checkItemIcon} />
                                 <ListItemText primary={msg} />
                             </ListItem>
                         )}

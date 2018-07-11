@@ -1,4 +1,4 @@
-import {Context, DocumentProps} from 'next/document';
+import {NextDocumentContext, DocumentProps} from 'next/document';
 import * as React from 'react';
 import {addLocaleData, injectIntl, IntlProvider} from 'react-intl';
 
@@ -13,7 +13,7 @@ if (typeof window !== 'undefined' && window.ReactIntlLocaleData) {
     });
 }
 
-export const withIntl = (Page: React.ComponentType<any> & {getInitialProps(ctx: Context): DocumentProps}) => {
+export const withIntl = (Page: React.ComponentType<any> & {getInitialProps(ctx: NextDocumentContext): DocumentProps}) => {
     const IntlPage = injectIntl(Page);
 
     return class PageWithIntl extends React.Component<any> {

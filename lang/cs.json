@@ -5,6 +5,8 @@
   "about.questions.startWithMD": "Chcete začít používat Material Design?",
   "about.questions.startWithRedux": "Chcete začít používat Redux?",
   "about.withTypescript": "...plus TypeScript",
+  "info.title": "Tato aplikace slouží k demonstrativním účelům",
+  "info.description": "Pokud máte zájem, můžete si stáhnout zdrojové kódy z Githubu. V případě zájmu, neváhejte poslat návrhy na vylepšení a opravy chyb.",
   "tech.react": "JavaScript knihovna pro psaní uživatelského rozhraní",
   "tech.md": "Tvořte své projekty hezky a rychle",
   "tech.redux": "Předvídatelný stavový kontejner",

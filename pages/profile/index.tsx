@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Grid} from '@material-ui/core';
-import {Layout} from '../../client/components';
+import {Layout} from '../../client/modules/common';
 import {UserDetail} from '../../client/modules/profile';
 
 export default () => (

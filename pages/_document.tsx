@@ -1,5 +1,5 @@
 import autoprefixer from 'autoprefixer';
-import Document, {Context, Head, Main, NextScript} from 'next/document';
+import Document, {Head, Main, NextDocumentContext, NextScript} from 'next/document';
 import postcss from 'postcss';
 import * as React from 'react';
 
@@ -17,7 +17,7 @@ const generateCss = async (css: string): Promise<string> => {
     return css;
 };
 
-type ContextWithLocale = Context & {req: {locale: string; localeDataScript: string}};
+type ContextWithLocale = NextDocumentContext & {req: {locale: string; localeDataScript: string}};
 
 export default class extends Document {
     static async getInitialProps({renderPage, req: {locale, localeDataScript}}: ContextWithLocale) {
@@ -28,12 +28,13 @@ export default class extends Document {
             </JssProvider>
         ));
 
+        const css = await generateCss(pageContext.sheetsRegistry.toString());
         return {
             ...page,
             pageContext,
             locale,
             localeDataScript,
-            styles: <style id="jss-server-side" dangerouslySetInnerHTML={{__html: await generateCss(pageContext.sheetsRegistry.toString())}} />,
+            styles: <style id="jss-server-side" dangerouslySetInnerHTML={{__html: css}} />,
         };
     }
 

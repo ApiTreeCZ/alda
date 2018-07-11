@@ -8,7 +8,7 @@ import {Dispatch} from 'redux';
 
 import {Store} from '../../client/Store';
 import {DependenciesPaper, InfoAction, InfoActionCreator, InfoHeaderPaper, InfoJsonDialog, InfoStore} from '../../client/modules/info';
-import {Layout} from '../../client/components';
+import {Layout} from '../../client/modules/common';
 
 interface OwnProps {}
 

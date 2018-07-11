@@ -1,5 +1,6 @@
-import {createGenerateClassName, createMuiTheme, jssPreset} from '@material-ui/core';
+import {createGenerateClassName, createMuiTheme, jssPreset, PaletteType} from '@material-ui/core';
 import {ThemeOptions} from '@material-ui/core/styles/createMuiTheme';
+import {CustomPalette} from './CustomPalette';
 
 // tslint:disable-next-line
 const {create, SheetsRegistry} = require('jss');
@@ -10,9 +11,9 @@ declare const global: any;
 // Configure JSS
 const jss = create({plugins: [...jssPreset().plugins]});
 
-const createPageContext = (themeOptions: ThemeOptions) => ({
+const createPageContext = (type?: PaletteType) => ({
     jss,
-    theme: createMuiTheme(themeOptions),
+    theme: createMuiTheme({palette: type ? CustomPalette[type] : CustomPalette.dark}),
     // theme: getTheme(palette),
     // This is needed in order to deduplicate the injection of CSS in the page.
     sheetsManager: new Map(),
@@ -34,7 +35,7 @@ export const StylesContext = {
         // Make sure to create a new store for every server-side request so that data
         // isn't shared between connections (which would be bad)
         if (!process.browser) {
-            return createPageContext(themeOptions);
+            return createPageContext(themeOptions!.palette!.type);
         }
 
         // Reuse context on the client-side
@@ -44,7 +45,7 @@ export const StylesContext = {
             !themeOptions.palette.type ||
             global.__INIT_MATERIAL_UI__.theme.palette.type !== themeOptions.palette.type
         ) {
-            global.__INIT_MATERIAL_UI__ = createPageContext(themeOptions);
+            global.__INIT_MATERIAL_UI__ = createPageContext(themeOptions!.palette!.type);
         }
         return global.__INIT_MATERIAL_UI__;
     },

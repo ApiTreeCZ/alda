@@ -4,9 +4,9 @@ import Link from 'next/link';
 import * as React from 'react';
 import {FormattedMessage} from 'react-intl';
 
-import {ThemeContext} from '../contexts';
-import {Lang} from '../Lang';
-import {LightbublFullIcon} from './LightbublFullIcon';
+import {ThemeContext} from '../../../../contexts';
+import {Lang} from '../../../../Lang';
+import {LightbublFullIcon} from '../icon';
 
 interface Props {
     readonly locale: string;

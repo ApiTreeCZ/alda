@@ -6,6 +6,8 @@ export const Lang = {
     ABOUT_QUESTIONS_STARTWITHMD: 'about.questions.startWithMD',
     ABOUT_QUESTIONS_STARTWITHREDUX: 'about.questions.startWithRedux',
     ABOUT_WITHTYPESCRIPT: 'about.withTypescript',
+    INFO_TITLE: 'info.title',
+    INFO_DESCRIPTION: 'info.description',
     TECH_REACT: 'tech.react',
     TECH_MD: 'tech.md',
     TECH_REDUX: 'tech.redux',
