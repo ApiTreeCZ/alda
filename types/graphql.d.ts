@@ -17,6 +17,15 @@ export interface Mutation {
     updateMe?: Account | null;
 }
 
+export interface MeUpdateInput {
+    id: string;
+    firstName?: string | null;
+    lastName?: string | null;
+}
+export interface UpdateMeMutationArgs {
+    input?: MeUpdateInput | null;
+}
+
 export namespace QueryResolvers {
     export interface Resolvers {
         me?: MeResolver;
@@ -24,7 +33,6 @@ export namespace QueryResolvers {
 
     export type MeResolver = Resolver<Account | null>;
 }
-
 export namespace AccountResolvers {
     export interface Resolvers {
         id?: IdResolver;
@@ -36,7 +44,6 @@ export namespace AccountResolvers {
     export type FirstNameResolver = Resolver<string>;
     export type LastNameResolver = Resolver<string>;
 }
-
 export namespace MutationResolvers {
     export interface Resolvers {
         updateMe?: UpdateMeResolver;
@@ -46,13 +53,4 @@ export namespace MutationResolvers {
     export interface UpdateMeArgs {
         input?: MeUpdateInput | null;
     }
-}
-
-export interface MeUpdateInput {
-    id: string;
-    firstName?: string | null;
-    lastName?: string | null;
-}
-export interface UpdateMeMutationArgs {
-    input?: MeUpdateInput | null;
 }

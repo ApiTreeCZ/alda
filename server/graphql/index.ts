@@ -1,5 +1,4 @@
-import {GraphQLSchema} from 'graphql';
-import {makeExecutableSchema} from 'graphql-tools';
+import {ApolloServer, Config, gql} from 'apollo-server-express';
 import {importSchema} from 'graphql-import';
 import {AccountService} from '../services';
 import {UpdateMeMutationArgs} from '@graphql-model';
@@ -14,7 +13,12 @@ const resolvers = {
     },
 };
 
-export const schema: GraphQLSchema = makeExecutableSchema({
-    typeDefs: importSchema('schema/root.graphql'),
-    resolvers,
-});
+export const createApolloServer = (config?: Pick<Config, 'resolvers' | 'typeDefs'>): ApolloServer => {
+    return new ApolloServer({
+        ...config,
+        typeDefs: gql`
+            ${importSchema('schema/root.graphql')}
+        `,
+        resolvers,
+    });
+};

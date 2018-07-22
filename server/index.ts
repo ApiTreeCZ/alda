@@ -1,6 +1,4 @@
 import * as accepts from 'accepts';
-import {graphiqlExpress, graphqlExpress} from 'apollo-server-express';
-import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import {readFileSync} from 'fs';
 import {sync} from 'glob';
@@ -8,7 +6,7 @@ import * as IntlPolyfill from 'intl';
 import * as nextjs from 'next';
 import {basename} from 'path';
 
-import {schema} from './graphql';
+import {createApolloServer} from './graphql';
 
 // tslint:disable-next-line
 require('dotenv').config();
@@ -44,9 +42,7 @@ const getMessages = (locale: string) => require(`../lang/${locale}.json`);
 app.prepare().then(() => {
     const server = express();
 
-    server.use('/graphql', bodyParser.json(), graphqlExpress({schema}));
-
-    server.use('/graphiql', graphiqlExpress({endpointURL: '/graphql'}));
+    createApolloServer().applyMiddleware({app: server});
 
     server.get('/healthz', (_, res) => {
         // check my health

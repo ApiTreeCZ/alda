@@ -34,6 +34,9 @@ export default () => (
                     <TechCard {...row} />
                 </Grid>
             ))}
+            <Grid item xs={12}>
+                <iframe src="/graphql" style={{width: '100%', height: 'calc(100vh - 100px)', margin: 0}} frameBorder={0} />
+            </Grid>
         </Grid>
     </Layout>
 );
