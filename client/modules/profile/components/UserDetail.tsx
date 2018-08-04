@@ -31,7 +31,8 @@ export const UserDetail = decorate<Props>(({}) => {
                                     </Grid>
                                     <Grid item>
                                         <Button onClick={handleOnClickRefresh} disabled={loading}>
-                                            <RefreshIcon />&nbsp;&nbsp;Refresh
+                                            <RefreshIcon />
+                                            &nbsp;&nbsp;Refresh
                                         </Button>
                                     </Grid>
                                 </Grid>
