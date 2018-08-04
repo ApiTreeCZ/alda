@@ -1,19 +1,13 @@
 import Router from 'next/router';
 import * as NProgress from 'nprogress';
 import * as React from 'react';
-import {compose} from 'react-apollo';
+import {ApolloProvider, compose} from 'react-apollo';
 import {Provider} from 'react-redux';
 
 import {createStore} from '../client/createStore';
-import {withApolloProvider, withIntl, withMaterialUi} from '../client/with';
+import {withApollo, withIntl, withMaterialUi} from '../client/with';
 
 NProgress.configure({parent: '#loadingContent'});
-
-Router.onRouteChangeStart = (_) => {
-    NProgress.start();
-};
-Router.onRouteChangeComplete = () => NProgress.done();
-Router.onRouteChangeError = () => NProgress.done();
 
 // tslint:disable-next-line
 const {default: withRedux} = require('next-redux-wrapper');
@@ -29,23 +23,53 @@ class AldaApp extends App {
         };
     }
 
+    componentDidMount(): void {
+        if (Router.router) {
+            Router.router.events.on('routeChangeStart', () => {
+                NProgress.start();
+            });
+            Router.router.events.on('routeChangeComplete', () => {
+                NProgress.done();
+            });
+            Router.router.events.on('routeChangeError', () => {
+                NProgress.done();
+            });
+        }
+    }
+
+    componentWillUnmount(): void {
+        if (Router.router) {
+            Router.router.events.off('routeChangeStart', () => {
+                // nothing
+            });
+            Router.router.events.off('routeChangeComplete', () => {
+                // nothing
+            });
+            Router.router.events.off('routeChangeError', () => {
+                // nothing
+            });
+        }
+    }
+
     render() {
-        const {Component, store, pageProps} = this.props;
+        const {Component, store, pageProps, apolloClient} = this.props;
         return (
-            <Container>
-                <Provider store={store}>
-                    {/* I can't use material-ui Layout (PageContainer) in _app.js */}
-                    {/* FIXME: https://github.com/zeit/next.js/pull/4288 */}
-                    <Component {...pageProps} />
-                </Provider>
-            </Container>
+            <ApolloProvider client={apolloClient}>
+                <Container>
+                    <Provider store={store}>
+                        {/* I can't use material-ui Layout (PageContainer) in _app.js */}
+                        {/* FIXME: https://github.com/zeit/next.js/pull/4288 */}
+                        <Component {...pageProps} />
+                    </Provider>
+                </Container>
+            </ApolloProvider>
         );
     }
 }
 
 export default withRedux(createStore)(
     compose(
-        withApolloProvider,
+        withApollo,
         withIntl,
         withMaterialUi,
     )(AldaApp),

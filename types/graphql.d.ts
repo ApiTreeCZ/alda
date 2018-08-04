@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {GraphQLResolveInfo} from 'graphql';
 
-type Resolver<Result, Args = any> = (parent: any, args: Args, context: any, info: GraphQLResolveInfo) => Promise<Result> | Result;
+export type Resolver<Result, Args = any> = (parent: any, args: Args, context: any, info: GraphQLResolveInfo) => Promise<Result> | Result;
 
 export interface Query {
     me?: Account | null;
@@ -31,8 +31,9 @@ export namespace QueryResolvers {
         me?: MeResolver;
     }
 
-    export type MeResolver = Resolver<Account | null>;
+    export type MeResolver<R = Account | null> = Resolver<R>;
 }
+
 export namespace AccountResolvers {
     export interface Resolvers {
         id?: IdResolver;
@@ -40,16 +41,17 @@ export namespace AccountResolvers {
         lastName?: LastNameResolver;
     }
 
-    export type IdResolver = Resolver<string>;
-    export type FirstNameResolver = Resolver<string>;
-    export type LastNameResolver = Resolver<string>;
+    export type IdResolver<R = string> = Resolver<R>;
+    export type FirstNameResolver<R = string> = Resolver<R>;
+    export type LastNameResolver<R = string> = Resolver<R>;
 }
+
 export namespace MutationResolvers {
     export interface Resolvers {
         updateMe?: UpdateMeResolver;
     }
 
-    export type UpdateMeResolver = Resolver<Account | null, UpdateMeArgs>;
+    export type UpdateMeResolver<R = Account | null> = Resolver<R, UpdateMeArgs>;
     export interface UpdateMeArgs {
         input?: MeUpdateInput | null;
     }

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Fragment} from 'react';
 import {withStyles} from '@material-ui/core';
 
 interface Props {}
@@ -17,4 +16,4 @@ const decorate = withStyles((theme) => ({
     } as any,
 }));
 
-export const AppFrame = decorate<Props>(({children}) => <Fragment>{children}</Fragment>);
+export const AppFrame = decorate<Props>(({children}) => <div id="loadingContent">{children}</div>);

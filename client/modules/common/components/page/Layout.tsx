@@ -35,7 +35,6 @@ export class Container extends React.Component<Props, State> {
         return (
             <AppFrame>
                 <TopBar locale={locale} gitHubUrl={'https://github.com/ApiTreeCZ/alda'} onClickOpenLeftMenu={this.handleOnOpenLeftMenu} />
-                <div id={'loadingContent'} />
                 <LeftMenu open={isOpenLeftMenu} onClose={this.handleOnCloseLeftMenu} />
                 <Content>{children}</Content>
             </AppFrame>

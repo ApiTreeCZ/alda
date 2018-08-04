@@ -1,5 +1,5 @@
-import {AppBar, IconButton, Toolbar, Typography, withStyles} from '@material-ui/core';
-import {LightbulbOutline, Menu as MenuIcon} from '@material-ui/icons';
+import {AppBar, IconButton, Theme, Toolbar, Typography, withStyles} from '@material-ui/core';
+import {Highlight as HighlightIcon, Menu as MenuIcon} from '@material-ui/icons';
 import Link from 'next/link';
 import * as React from 'react';
 import {FormattedMessage} from 'react-intl';
@@ -14,7 +14,7 @@ interface Props {
     readonly onClickOpenLeftMenu: () => void;
 }
 
-const decorate = withStyles((theme) => ({
+const decorate = withStyles((theme: Theme) => ({
     flex: {
         flex: 1,
     },
@@ -54,7 +54,7 @@ export const TopBar = decorate<Props>(({gitHubUrl, classes, locale, onClickOpenL
             <ThemeContext.Consumer>
                 {({paletteType, toggleTheme}) => (
                     <IconButton color="inherit" onClick={toggleTheme}>
-                        {paletteType === 'light' ? <LightbulbOutline /> : <LightbublFullIcon />}
+                        {paletteType === 'light' ? <HighlightIcon /> : <LightbublFullIcon />}
                     </IconButton>
                 )}
             </ThemeContext.Consumer>
