@@ -3,6 +3,8 @@ import {importSchema} from 'graphql-import';
 import {AccountService} from '../services';
 import {UpdateMeMutationArgs} from '@graphql-model';
 
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
 const resolvers = {
     Query: {
         me: (_: any) => AccountService.findLoggedUser(),
@@ -13,7 +15,7 @@ const resolvers = {
     },
 };
 
-export const createApolloServer = (config?: Pick<Config, 'resolvers' | 'typeDefs'>): ApolloServer => {
+export const createApolloServer = (config?: Omit<Config, 'resolvers' | 'typeDefs'>): ApolloServer => {
     return new ApolloServer({
         ...config,
         typeDefs: gql`

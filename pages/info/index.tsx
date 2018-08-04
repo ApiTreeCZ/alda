@@ -4,7 +4,6 @@ import {OpenInBrowser as OpenInBrowserIcon, Refresh as RefreshIcon} from '@mater
 import * as React from 'react';
 import {Fragment} from 'react';
 import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
 
 import {Store} from '../../client/Store';
 import {DependenciesPaper, InfoAction, InfoActionCreator, InfoHeaderPaper, InfoJsonDialog, InfoStore} from '../../client/modules/info';
@@ -22,7 +21,13 @@ type Props = ConnectedState & ConnectedDispatch & OwnProps;
 
 const transition = (props: TransitionProps) => <Slide direction="left" {...props} />;
 
-export class Container extends React.Component<Props> {
+const initialState = {
+    isOpenDialogJson: false,
+};
+
+export class Container extends React.Component<Props, typeof initialState> {
+    readonly state = initialState;
+
     componentDidMount(): void {
         this.props.fetchInfo();
     }
@@ -32,15 +37,16 @@ export class Container extends React.Component<Props> {
     };
 
     handleOnOpenDialogJson = () => {
-        this.props.openDialogJson();
+        this.setState({isOpenDialogJson: true});
     };
 
     handleOnCloseDialogJson = () => {
-        this.props.closeDialogJson();
+        this.setState({isOpenDialogJson: false});
     };
 
     render() {
         const {info} = this.props;
+        const {isOpenDialogJson} = this.state;
         return (
             <Layout>
                 <Grid container spacing={8}>
@@ -51,10 +57,12 @@ export class Container extends React.Component<Props> {
                             </Grid>
                             <Grid item>
                                 <Button onClick={this.handleOnClickRefresh}>
-                                    <RefreshIcon />&nbsp;&nbsp;Refresh
+                                    <RefreshIcon />
+                                    &nbsp;&nbsp;Refresh
                                 </Button>
                                 <Button onClick={this.handleOnOpenDialogJson} disabled={!info.data || info.isFetching}>
-                                    <OpenInBrowserIcon />&nbsp;&nbsp;Show in JSON
+                                    <OpenInBrowserIcon />
+                                    &nbsp;&nbsp;Show in JSON
                                 </Button>
                             </Grid>
                         </Grid>
@@ -70,7 +78,7 @@ export class Container extends React.Component<Props> {
                         </Fragment>
                     )}
                 </Grid>
-                <InfoJsonDialog open={info.isOpenDialogJson} data={info.data} onClose={this.handleOnCloseDialogJson} transition={transition} />
+                <InfoJsonDialog open={isOpenDialogJson} data={info.data} onClose={this.handleOnCloseDialogJson} transition={transition} />
             </Layout>
         );
     }
@@ -78,5 +86,5 @@ export class Container extends React.Component<Props> {
 
 export default connect<ConnectedState, ConnectedDispatch, OwnProps, any>(
     ({info}: Store) => ({info}),
-    (dispatch: Dispatch): ConnectedDispatch => InfoActionCreator(dispatch),
+    InfoActionCreator,
 )(Container);

@@ -42,7 +42,7 @@ const getMessages = (locale: string) => require(`../lang/${locale}.json`);
 app.prepare().then(() => {
     const server = express();
 
-    createApolloServer().applyMiddleware({app: server});
+    createApolloServer({introspection: true, playground: true}).applyMiddleware({app: server});
 
     server.get('/healthz', (_, res) => {
         // check my health

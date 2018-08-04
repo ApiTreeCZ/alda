@@ -36,12 +36,12 @@ graphiql: [http://localhost:8080/graphiql](http://localhost:8080/graphiql)
 
 ## Libraries
 
--   **Typescript** 2.9.x
+-   **Typescript** 3.0.x
 -   **React** 16.4.x
 -   **Next.js** 6.1.x
 -   **GraphQL** 0.13.x
 -   **React Apollo** 2.1.x
--   **Material-UI** 1.3.x
+-   **Material-UI** 1.4.x
 -   **Redux** 4.x
 -   **Redux-form** 7.4.x
 -   **React-intl** 2.4.x
